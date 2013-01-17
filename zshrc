@@ -43,8 +43,21 @@ set -o vi
 
 source ~/.zshrc-local
 
-eval "$(rbenv init -)"
-bindkey -v
+export MVN_HOME=$HOME/apps/apache-maven-3.0.4
+export MAVEN_OPTS="-javaagent:/Users/ebarendt/apps/jrebel/jrebel.jar $MAVEN_OPTS"
+export PATH="$MVN_HOME/bin:$PATH"
+
+alias fact="elinks -dump randomfunfacts.com | sed -n '/^| /p' | tr -d \|"
+alias glr='git pull --rebase && fact'
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+export RUBY_HEAP_MIN_SLOTS=1000000
+export RUBY_HEAP_SLOTS_INCREMENT=1000000
+export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+export RUBY_GC_MALLOC_LIMIT=100000000
+export RUBY_HEAP_FREE_MIN=500000
