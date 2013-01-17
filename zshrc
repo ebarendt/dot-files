@@ -30,15 +30,21 @@ ZSH_THEME="afowler"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew heroku rvm bundler)
+plugins=(git brew heroku bundler)
 
 source $ZSH/oh-my-zsh.sh
+unsetopt correct_all
 
 # Customize to your needs...
 export JAVA_HOME=`/usr/libexec/java_home`
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/bin:$PATH"
 export NODE_PATH=/usr/local/lib/node_modules
 set -o vi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+source ~/.zshrc-local
+
+eval "$(rbenv init -)"
+bindkey -v
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
