@@ -41,17 +41,16 @@ export PATH="$HOME/.rbenv/bin:$HOME/bin:$PATH"
 export NODE_PATH=/usr/local/lib/node_modules
 set -o vi
 
-source ~/.zshrc-local
+if [ -f ~/.zshrc-local ]; then
+	source ~/.zshrc-local
+fi
 
-export MVN_HOME=$HOME/apps/apache-maven-3.0.4
-export MAVEN_OPTS="-javaagent:/Users/ebarendt/apps/jrebel/jrebel.jar $MAVEN_OPTS"
-export PATH="$MVN_HOME/bin:$PATH"
-
-alias fact="elinks -dump randomfunfacts.com | sed -n '/^| /p' | tr -d \|"
-alias glr='git pull --rebase && fact'
+alias glr='git pull --rebase'
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+export PATH="/usr/local/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
