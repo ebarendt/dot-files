@@ -1,0 +1,12 @@
+{
+	"installed_packages":
+	[
+		"CTags",
+		"Git",
+		"GitGutter",
+		"Package Control",
+		"RubyTest",
+		"SideBarGit",
+		"Solarized Color Scheme"
+	]
+}
