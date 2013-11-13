@@ -35,3 +35,11 @@ end
 #  rescue LoadError
 #  end
 #end
+
+def admin_user
+  User.find_by email: 'developers@gotime.com'
+end
+
+def q params
+  Rack::Utils.parse_nested_query params
+end
