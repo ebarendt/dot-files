@@ -30,7 +30,8 @@
 		".git",
 		".hg",
 		"CVS",
-		".idea"
+		".idea",
+		".zeus.sock"
 	],
 	"font_face": "Source Code Pro",
 	"font_size": 14,
