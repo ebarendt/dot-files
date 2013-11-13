@@ -34,5 +34,5 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 
-let g:rspec_command = "!rspec --drb {spec}"
+let g:rspec_command = "!zeus rspec {spec}"
 
