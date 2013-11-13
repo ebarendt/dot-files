@@ -1,3 +1,6 @@
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -46,9 +49,6 @@ if [ -f ~/.zshrc-local ]; then
 fi
 
 alias glr='git pull --rebase'
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export PATH="/usr/local/bin:$PATH"
 
