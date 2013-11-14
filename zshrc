@@ -71,4 +71,7 @@ alias gpr="git pull --rebase"
 alias gpm="git push origin master"
 
 # added by travis gem
-source /Users/ericb/.travis/travis.sh
+if [ -f $HOME/.travis/travis.sh ]; then
+  source $HOME/.travis/travis.sh
+fi
+
