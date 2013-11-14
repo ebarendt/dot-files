@@ -14,6 +14,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-rails'
+Bundle 'pangloss/vim-javascript'
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
