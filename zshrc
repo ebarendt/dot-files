@@ -70,6 +70,9 @@ alias gco="git co"
 alias gpr="git pull --rebase"
 alias gpm="git push origin master"
 
+alias srv="spring rails s"
+alias con="spring rails c"
+
 # added by travis gem
 if [ -f $HOME/.travis/travis.sh ]; then
   source $HOME/.travis/travis.sh
