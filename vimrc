@@ -15,6 +15,8 @@ Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-rails'
 Bundle 'pangloss/vim-javascript'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-surround'
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
@@ -22,6 +24,7 @@ filetype plugin on    " Enable filetype-specific plugins
 let mapleader = ","
 
 " Rspec.vim mappings
+map <Leader>r :Rake<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
@@ -37,7 +40,7 @@ set autoindent
 set showmatch
 set number
 syntax on
-set background=dark
+set background=light
 colorscheme solarized
 
 " Use Silver Searcher instead of grep
