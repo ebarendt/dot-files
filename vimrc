@@ -40,7 +40,7 @@ set autoindent
 set showmatch
 set number
 syntax on
-set background=light
+set background=dark
 colorscheme solarized
 
 " Use Silver Searcher instead of grep

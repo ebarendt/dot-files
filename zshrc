@@ -48,23 +48,16 @@ if [ -f ~/.zshrc-local ]; then
 	source ~/.zshrc-local
 fi
 
-alias glr='git pull --rebase'
-
-export PATH="/usr/local/bin:$PATH"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export EDITOR=/usr/local/bin/vim
-
-alias gqa="source ~/.aws/accounts/gotime_qa/rc"
-alias gprod="source ~/.aws/accounts/gotime_prod/rc"
-
+alias glr="git pull --rebase"
 alias gco="git co"
 alias gpr="git pull --rebase"
 alias gpm="git push origin master"
 
-alias srv="spring rails s"
-alias con="spring rails c"
+export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
+
+export EDITOR=/usr/local/bin/vim
+
+alias rta="rake test:all"
 
 # added by travis gem
 if [ -f $HOME/.travis/travis.sh ]; then
