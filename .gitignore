@@ -1,0 +1,10 @@
+###SublimeText###
+*.cache
+Package Control.sublime-settings
+
+# SublimeText project files
+/*.sublime-project
+*.sublime-workspace
+Package Control.last-run
+Package Control.system-ca-bundle
+
