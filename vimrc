@@ -28,10 +28,10 @@ map <Leader>r :Rake<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
-let g:rspec_command = "!zeus rspec {spec}"
+let g:rspec_command = "!bundle exec rspec {spec}"
 
 map <C-n> :cn<CR>
-map <C-p> :cp<CR>
+" map <C-p> :cp<CR>
 
 set expandtab
 set tabstop=2
@@ -40,8 +40,11 @@ set autoindent
 set showmatch
 set number
 syntax on
+
+" Colors & Fonts
 set background=dark
 colorscheme solarized
+set guifont=Droid\ Sans\ Mono:h12
 
 " Use Silver Searcher instead of grep
 set grepprg=ag
@@ -49,3 +52,5 @@ set grepprg=ag
 " Press F4 to toggle highlighting on/off, and show current value.
 noremap <F4> :set hlsearch! hlsearch?<CR>
 
+" Let ctrl-p show hidden files (dotfiles)
+let g:ctrlp_show_hidden = 1

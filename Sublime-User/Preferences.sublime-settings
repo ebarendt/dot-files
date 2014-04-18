@@ -39,7 +39,7 @@
 	[
 		"Vintage"
 	],
+	"shift_tab_unindent": false,
 	"tab_size": 2,
-	"translate_tabs_to_spaces": true,
-  "shift_tab_unindent": false
+	"translate_tabs_to_spaces": true
 }
