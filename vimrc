@@ -39,6 +39,7 @@ set shiftwidth=2
 set autoindent
 set showmatch
 set number
+set mouse=a
 syntax on
 
 " Colors & Fonts
