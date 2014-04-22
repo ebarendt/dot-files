@@ -17,6 +17,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround'
+Bundle 'rking/ag.vim'
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
