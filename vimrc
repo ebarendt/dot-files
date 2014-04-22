@@ -41,6 +41,7 @@ set autoindent
 set showmatch
 set number
 set mouse=a
+set backspace=indent,eol,start
 syntax on
 
 " Colors & Fonts
