@@ -57,3 +57,6 @@ noremap <F4> :set hlsearch! hlsearch?<CR>
 
 " Let ctrl-p show hidden files (dotfiles)
 let g:ctrlp_show_hidden = 1
+
+" Strip trailing spaces
+autocmd FileType rb,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
