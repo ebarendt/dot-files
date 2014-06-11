@@ -1,13 +1,13 @@
 export EDITOR=vim
 export TERM=xterm-256color
+export LESS=-R
 
 eval "$(rbenv init -)"
-PATH=~/bin:$PATH
+export PATH="~/bin:/usr/local/heroku/bin:$PATH"
 
 alias ls='ls -FG'
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+alias gpr='git pull --rebase'
+alias gco='git checkout'
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
