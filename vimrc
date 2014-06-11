@@ -43,9 +43,10 @@ set tabstop=2
 set shiftwidth=2
 set autoindent
 set showmatch
-set number
-set mouse=a
-set backspace=indent,eol,start
+set number                      " line numbering
+set mouse=a                     " turn on the mouse
+set backspace=indent,eol,start  " backspace all the things
+set clipboard=unnamed           " use the system clipboard
 syntax on
 
 " Colors & Fonts
