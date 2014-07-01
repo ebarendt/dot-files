@@ -19,6 +19,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -50,9 +51,9 @@ set clipboard=unnamed           " use the system clipboard
 syntax on
 
 " Colors & Fonts
-set background=light
+set background=dark
 colorscheme solarized
-set guifont=Droid\ Sans\ Mono:h12
+set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
 
 " Use Silver Searcher instead of grep
 set grepprg=ag
@@ -79,3 +80,14 @@ augroup BWCCreateDir
   autocmd!
   autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+
+" Tell vim about arduino
+autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
+
+" airline config
+set laststatus=2
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
