@@ -37,7 +37,8 @@
 	"font_size": 12,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
+		"RubyTest"
 	],
 	"shift_tab_unindent": false,
 	"tab_size": 2,
