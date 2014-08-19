@@ -19,6 +19,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-endwise.git'
 " Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
