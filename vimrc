@@ -49,6 +49,7 @@ set number                      " line numbering
 set mouse=a                     " turn on the mouse
 set backspace=indent,eol,start  " backspace all the things
 set clipboard=unnamed           " use the system clipboard
+set completeopt=longest         " turn off the autocomplete menu
 syntax on
 
 " Colors & Fonts
