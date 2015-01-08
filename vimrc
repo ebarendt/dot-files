@@ -71,6 +71,9 @@ let g:ctrlp_show_hidden = 1
 " Strip trailing spaces
 autocmd FileType rb,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+" Enable crontab -e on OSX
+autocmd filetype crontab setlocal nobackup nowritebackup
+
 " Automatically create parent directories
 function s:MkNonExDir(file, buf)
   if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
