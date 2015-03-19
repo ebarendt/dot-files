@@ -1,13 +1,26 @@
 #!/bin/bash
 
-if [ ! -f ~/.tmux.conf -a ! -L ~/.tmux.conf ]; then
-  ln -s tmux.conf ~/.tmux.conf
-fi
+cwd=`pwd`
 
-if [ ! -f ~/.inputrc -a ! -L ~/.inputrc ]; then
-  ln -s inputrc ~/.inputrc
-fi
+function copy {
+  if [ ! -f ~/.$1 -a ! -L ~/.$1 ]; then
+    echo "Linking $1"
+    ln -s $(pwd)/$1 ~/.$1
+  else
+    echo "Skipping $1"
+  fi
+}
 
-if [ ! -f ~/.vimrc -a ! -L ~/.vimrc ]; then
-  ln -s vimrc ~/.vimrc
+copy profile
+copy irbrc
+copy tmux.conf
+copy inputrc
+copy vimrc
+
+if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+  mkdir -p ~/.vim/bundle
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qall
+else
+  echo "Vundle already installed"
 fi
