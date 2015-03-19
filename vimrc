@@ -20,7 +20,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise.git'
-" Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -92,7 +92,7 @@ augroup END
 autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
 " airline config
-" set laststatus=2
+set laststatus=2
 " let g:airline_powerline_fonts = 1
 " if !exists('g:airline_symbols')
 "   let g:airline_symbols = {}
