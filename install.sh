@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f ~/.inputrc -a ! -L ~/.tmux.conf ]; then
+if [ ! -f ~/.tmux.conf -a ! -L ~/.tmux.conf ]; then
   ln -s tmux.conf ~/.tmux.conf
 fi
 
@@ -11,8 +11,3 @@ fi
 if [ ! -f ~/.vimrc -a ! -L ~/.vimrc ]; then
   ln -s vimrc ~/.vimrc
 fi
-
-if [ ! -d ~/.vim/bundle/ctrlp.vim ]; then
-  cd ~/.vim
-  git clone git://github.com/kien/ctrlp.vim.git
-fi 
