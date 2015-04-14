@@ -30,3 +30,7 @@ PS1='\[\e[0;33m\]\u@${HOSTNAME}\[\e[m\] \W \[\e[0;36m\]$(parse_git_branch)\[\e[m
 function glone {
   git clone git@github.com:$1.git
 }
+
+if [ -f ~/.profile-local ]; then
+  source ~/.profile-local
+fi
