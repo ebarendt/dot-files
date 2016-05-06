@@ -21,6 +21,7 @@ Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise.git'
 Plugin 'bling/vim-airline'
+Plugin 'elixir-lang/vim-elixir'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -55,7 +56,7 @@ set completeopt=longest         " turn off the autocomplete menu
 syntax on
 
 " Colors & Fonts
-set background=dark
+set background=light
 colorscheme solarized
 set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
 
