@@ -1,4 +1,0 @@
-{
-	"last_test_run": "ruby -Itest test/unit/lib/context_test.rb",
-	"last_test_working_dir": "/Users/ericb/src/auth_time_client"
-}
