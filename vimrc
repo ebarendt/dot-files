@@ -56,8 +56,8 @@ set completeopt=longest         " turn off the autocomplete menu
 syntax on
 
 " Colors & Fonts
-set background=light
-colorscheme solarized
+" set background=light
+" colorscheme solarized
 set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
 
 " Use Silver Searcher instead of grep
