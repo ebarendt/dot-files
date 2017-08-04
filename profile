@@ -31,6 +31,8 @@ function glone {
   git clone git@github.com:$1.git
 }
 
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 if [ -f ~/.profile-local ]; then
   source ~/.profile-local
 fi
