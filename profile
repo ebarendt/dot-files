@@ -4,8 +4,8 @@ export EDITOR=vim
 export TERM=xterm-256color
 export LESS=-R
 
+export PATH="$HOME/.rbenv/bin:~/bin:/usr/local/heroku/bin:$PATH"
 eval "$(rbenv init -)"
-export PATH="~/bin:/usr/local/heroku/bin:$PATH"
 
 alias ls='ls -FG'
 alias gpr='git pull --rebase'
@@ -36,3 +36,5 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 if [ -f ~/.profile-local ]; then
   source ~/.profile-local
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
