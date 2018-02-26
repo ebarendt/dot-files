@@ -1,30 +1,24 @@
-set nocompatible      " We're running Vim, not Vi!
-filetype off          " Enable filetype detection
+packadd minpac
+call minpac#init()
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call minpac#add('altercation/vim-colors-solarized')
+call minpac#add('kchmck/vim-coffee-script')
+call minpac#add('kien/ctrlp.vim')
+call minpac#add('scrooloose/nerdtree')
+call minpac#add('thoughtbot/vim-rspec')
+call minpac#add('tpope/vim-bundler')
+call minpac#add('tpope/vim-rails')
+call minpac#add('pangloss/vim-javascript')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-surround')
+call minpac#add('rking/ag.vim')
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('tpope/vim-endwise')
+call minpac#add('bling/vim-airline')
+call minpac#add('elixir-lang/vim-elixir')
 
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rails'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
-Plugin 'rking/ag.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-endwise.git'
-Plugin 'bling/vim-airline'
-Plugin 'elixir-lang/vim-elixir'
-
-" All of your Plugins must be added before the following line
-call vundle#end()
+command! PackUpdate call minpac#update()
+command! PackClean call minpac#clean()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins

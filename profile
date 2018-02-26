@@ -1,6 +1,9 @@
 # vim: set syntax=sh :
 
 export EDITOR=vim
+export VIMCONFIG=~/.vim
+export VIMDATA=~/.vim
+
 export TERM=xterm-256color
 export LESS=-R
 
