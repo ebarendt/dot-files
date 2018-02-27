@@ -46,7 +46,6 @@ syntax on
 " Colors & Fonts
 " set background=light
 " colorscheme solarized
-set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
 
 " Use Silver Searcher instead of grep
 set grepprg=ag
@@ -83,11 +82,6 @@ autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
 " airline config
 set laststatus=2
-" let g:airline_powerline_fonts = 1
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-" let g:airline_symbols.space = "\ua0"
 
 " Mark tabs and trailing whitepace
 set list listchars=tab:\|_,trail:·
