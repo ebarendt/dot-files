@@ -1,11 +1,12 @@
 packadd minpac
 call minpac#init()
 
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+
 call minpac#add('altercation/vim-colors-solarized')
 call minpac#add('kchmck/vim-coffee-script')
 call minpac#add('kien/ctrlp.vim')
 call minpac#add('scrooloose/nerdtree')
-call minpac#add('thoughtbot/vim-rspec')
 call minpac#add('tpope/vim-bundler')
 call minpac#add('tpope/vim-rails')
 call minpac#add('pangloss/vim-javascript')
@@ -24,13 +25,6 @@ filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
 let mapleader = ","
-
-" Rspec.vim mappings
-map <Leader>r :Rake<CR>
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-let g:rspec_command = "!bundle exec rspec {spec}"
 
 map <C-n> :cn<CR>
 map <C-l> :cp<CR>
