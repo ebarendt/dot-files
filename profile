@@ -15,8 +15,11 @@ alias gpr='git pull --rebase'
 alias gco='git checkout'
 alias gpm='git push origin master'
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+which brew >/dev/null
+if [[ $? == 0 ]]; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
 fi
 
 function parse_git_dirty {
