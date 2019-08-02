@@ -1,6 +1,3 @@
-export PATH="$HOME/.rbenv/bin:$PATH"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -33,7 +30,7 @@ ZSH_THEME="afowler"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew heroku bundler)
+plugins=(git heroku)
 
 export UNBUNDLED_COMMANDS=knife
 
@@ -47,7 +44,7 @@ export NODE_PATH=/usr/local/lib/node_modules
 set -o vi
 
 if [ -f ~/.zshrc-local ]; then
-	source ~/.zshrc-local
+  source ~/.zshrc-local
 fi
 
 alias glr="git pull --rebase"
@@ -59,13 +56,12 @@ export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
 
 export EDITOR=/usr/local/bin/vim
 
-alias bi="bundle install"
 alias be="bundle exec"
-alias rta="be rake test:all"
-alias rake="be rake"
 
-# added by travis gem
-if [ -f $HOME/.travis/travis.sh ]; then
-  source $HOME/.travis/travis.sh
-fi
+setopt HIST_IGNORE_DUPS
+setopt APPEND_HISTORY
+SAVEHIST=100000
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
