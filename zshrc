@@ -30,17 +30,10 @@ ZSH_THEME="afowler"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git heroku)
-
-export UNBUNDLED_COMMANDS=knife
+# plugins=(git heroku)
 
 source $ZSH/oh-my-zsh.sh
-unsetopt correct_all
 
-# Customize to your needs...
-export JAVA_HOME=`/usr/libexec/java_home`
-export PATH="$HOME/.rbenv/bin:$HOME/bin:$PATH"
-export NODE_PATH=/usr/local/lib/node_modules
 set -o vi
 
 if [ -f ~/.zshrc-local ]; then
@@ -51,17 +44,16 @@ alias glr="git pull --rebase"
 alias gco="git co"
 alias gpr="git pull --rebase"
 alias gpm="git push origin master"
-
-export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
-
-export EDITOR=/usr/local/bin/vim
-
 alias be="bundle exec"
 
-setopt HIST_IGNORE_DUPS
-setopt APPEND_HISTORY
-SAVEHIST=100000
+export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
+export EDITOR=/usr/local/bin/vim
+
+autoload bashcompinit
+bashcompinit
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+type axl > /dev/null && eval $(axl bash_complete)
 
