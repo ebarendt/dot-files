@@ -16,6 +16,7 @@ copy irbrc
 copy tmux.conf
 copy inputrc
 copy vimrc
+copy gemrc
 
 if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
   mkdir -p ~/.vim/bundle
