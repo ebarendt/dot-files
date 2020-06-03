@@ -36,15 +36,15 @@ source $ZSH/oh-my-zsh.sh
 
 set -o vi
 
-if [ -f ~/.zshrc-local ]; then
-  source ~/.zshrc-local
-fi
-
 alias glr="git pull --rebase"
 alias gco="git co"
 alias gpr="git pull --rebase"
 alias gpm="git push origin master"
 alias be="bundle exec"
+
+setopt HIST_IGNORE_DUPS
+setopt APPEND_HISTORY
+SAVEHIST=100000
 
 export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
 export EDITOR=/usr/local/bin/vim
@@ -56,4 +56,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 type axl > /dev/null && eval $(axl bash_complete)
+
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
 
