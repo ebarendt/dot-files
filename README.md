@@ -10,6 +10,8 @@ from vim:
 
 # Keybindings:
 
+http://cobus.io/osx/2017/02/09/OSX_Home_End_Keys.html
+
 ```shell
 mkdir ~/Library/KeyBindings
 cp ~/src/dot-files/DefaultKeyBinding.dict ~/Library/Keybindings
