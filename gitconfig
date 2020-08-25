@@ -1,0 +1,31 @@
+[user]
+	email = eric@barendt.org
+	name = Eric Barendt
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --abbrev-commit
+	st = status
+	co = checkout
+[core]
+	excludesfile = /home/eric/.gitignore_global
+	autocrlf = input
+	pager = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
+[push]
+	default = simple
+[merge]
+	tool = vimdiff
+[interactive]
+	diffFilter = diff-highlight
+[color]
+	ui = always
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	commit = green
+	meta = yellow
+	frag = cyan
+	old = red
+	new = green
+	whitespace = red reverse
