@@ -56,8 +56,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$PYENV_ROOT/bin:$RBENV_ROOT/bin:$PATH"
 
-eval "$(pyenv init -)"
-eval "$(rbenv init -)"
+[[ -d $PYENV_ROOT ]] && eval "$(pyenv init -)"
+[[ -d $RBENV_ROOT ]] && eval "$(rbenv init -)"
 
 type axl > /dev/null && eval $(axl bash_complete)
 
