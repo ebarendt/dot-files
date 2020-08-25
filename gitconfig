@@ -1,5 +1,5 @@
 [user]
-	email = eric@barendt.org
+	email = <insert email here>
 	name = Eric Barendt
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --abbrev-commit
