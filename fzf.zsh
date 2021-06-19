@@ -7,6 +7,8 @@ elif [[ -a "/usr/share/fzf" ]]; then
 	# Linux
 	FZF_SHELL_PATH="/usr/share/fzf"
 	# FZF_BIN_PATH not necessary since it'll be in /usr[/local]/bin
+elif [[ -a "/usr/share/doc/fzf" ]]; then
+	FZF_SHELL_PATH="/usr/share/doc/fzf/examples"
 elif [[ -a "$HOME/.fzf" ]]; then
 	# Git install
 	FZF_SHELL_PATH="$HOME/.fzf/shell"
