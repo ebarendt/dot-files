@@ -31,6 +31,7 @@ ZSH_THEME="afowler"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # plugins=(git heroku)
+plugins=(asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -51,15 +52,6 @@ export EDITOR=/usr/local/bin/vim
 
 autoload bashcompinit
 bashcompinit
-
-export PYENV_ROOT="$HOME/.pyenv"
-export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$PYENV_ROOT/bin:$RBENV_ROOT/bin:$PATH"
-
-[[ -d $PYENV_ROOT ]] && eval "$(pyenv init -)"
-[[ -d $RBENV_ROOT ]] && eval "$(rbenv init -)"
-
-type axl > /dev/null && eval $(axl bash_complete)
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
