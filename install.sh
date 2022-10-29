@@ -17,11 +17,16 @@ copy tmux.conf
 copy inputrc
 copy vimrc
 copy gemrc
+copy zshrc
+copy fzf.zsh
+copy gitignore_global
 
-if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
-  mkdir -p ~/.vim/bundle
-  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  vim +PluginInstall +qall
-else
-  echo "Vundle already installed"
+if [ ! -f ~/.gitconfig ]; then
+  cp gitconfig ~/.gitconfig
 fi
+
+if [ ! -d ~/.vim/pack/minpac/opt/minpac ]; then
+  git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+  vim +PackUpdate
+fi
+
