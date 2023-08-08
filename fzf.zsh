@@ -1,8 +1,8 @@
 # Setup fzf (handle various environments)
-if [[ -a "/usr/local/opt/fzf" ]]; then
+if [[ -a "/opt/homebrew/opt/fzf/bin/fzf" ]]; then
 	# OS X
-	FZF_SHELL_PATH="/usr/local/opt/fzf/shell"
-	FZF_BIN_PATH="/usr/local/opt/fzf/bin"
+	FZF_SHELL_PATH="/opt/homebrew/opt/fzf/shell"
+	FZF_BIN_PATH="/opt/homebrew/opt/fzf/bin"
 elif [[ -a "/usr/share/fzf" ]]; then
 	# Linux
 	FZF_SHELL_PATH="/usr/share/fzf"

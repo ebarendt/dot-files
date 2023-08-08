@@ -31,7 +31,7 @@ ZSH_THEME="afowler"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # plugins=(git heroku)
-plugins=(asdf direnv ssh-agent)
+plugins=(asdf brew direnv ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -47,7 +47,7 @@ setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY
 SAVEHIST=100000
 
-export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 export EDITOR=/usr/local/bin/vim
 
 autoload bashcompinit
