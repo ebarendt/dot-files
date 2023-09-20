@@ -9,6 +9,7 @@
 .bundle
 dev-data
 .env
+.envrc
 test/dummy/.generators
 test/dummy/.rakeTasks
 .generators
