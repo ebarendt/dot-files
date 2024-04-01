@@ -5,16 +5,19 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --abbrev-commit
 	st = status
 	co = checkout
+	sfclone = !git clone git@github.com:stitchfix/$1
 [core]
-	excludesfile = /home/eric/.gitignore_global
+	excludesFile = ~/.gitignore_global
 	autocrlf = input
-	pager = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
+	pager = delta #/opt/homebrew/Cellar/git/2.41.0_2/share/git-core/contrib/diff-highlight/diff-highlight | less
+	hooksPath = .githooks/
 [push]
 	default = simple
 [merge]
 	tool = vimdiff
+  conflictstyle = diff3
 [interactive]
-	diffFilter = diff-highlight
+	diffFilter = delta --color-only
 [color]
 	ui = always
 [color "diff-highlight"]
@@ -29,5 +32,15 @@
 	old = red
 	new = green
 	whitespace = red reverse
+  colorMoved = default
 [init]
 	defaultBranch = main
+[url "git@github.com:stitchfix"]
+    insteadOf = https://github.com/stitchfix
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[delta]
+  navigate = true
+  side-by-side = true

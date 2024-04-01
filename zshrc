@@ -31,7 +31,7 @@ ZSH_THEME="afowler"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # plugins=(git heroku)
-plugins=(asdf brew direnv ssh-agent)
+plugins=(asdf brew direnv ssh-agent aws)
 
 source $ZSH/oh-my-zsh.sh
 
