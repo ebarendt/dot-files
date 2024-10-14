@@ -59,3 +59,5 @@ bashcompinit
 
 setopt auto_cd
 export cdpath=(. ~ ~/src/)
+
+export AWS_PAGER=""
