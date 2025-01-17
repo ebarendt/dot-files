@@ -17,7 +17,6 @@ if [ ! -f ~/.zshrc ]; then
   rm ~/.zshrc
 fi
 
-copy profile
 copy irbrc
 copy tmux.conf
 copy inputrc
