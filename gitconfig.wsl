@@ -1,0 +1,68 @@
+[core]
+  sshCommand = ssh.exe
+  excludesFile = ~/.gitignore_global
+  autocrlf = input
+  pager = delta #/opt/homebrew/Cellar/git/2.41.0_2/share/git-core/contrib/diff-highlight/diff-highlight | less
+  hooksPath = .githooks/
+
+[user]
+  email = eric@barendt.org
+  name = Eric Barendt
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6n7APsGxZU25H9IlfYSNWF9YbRIQK0bPPgzoTXhuf9
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/mnt/c/Users/ebare/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+
+[commit]
+  gpgsign = true
+
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --abbrev-commit
+  st = status
+  co = checkout
+  sfclone = !git clone git@github.com:stitchfix/$1
+
+[push]
+  default = simple
+
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+
+[interactive]
+  diffFilter = delta --color-only
+
+[color]
+  ui = always
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
+[color "diff"]
+  commit = green
+  meta = yellow
+  frag = cyan
+  old = red
+  new = green
+  whitespace = red reverse
+  colorMoved = default
+
+[init]
+  defaultBranch = main
+
+[url "git@github.com:stitchfix"]
+  insteadOf = https://github.com/stitchfix
+
+[delta]
+  navigate = true
+  side-by-side = true
+
+[fetch]
+  prune = true
+
