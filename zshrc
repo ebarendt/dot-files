@@ -51,8 +51,10 @@ SAVEHIST=100000
 export PATH="/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 export EDITOR=/usr/local/bin/vim
 
-autoload bashcompinit
-bashcompinit
+#autoload bashcompinit
+#bashcompinit
+
+autoload -U compinit; compinit
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
@@ -61,3 +63,4 @@ setopt auto_cd
 export cdpath=(. ~ ~/src/)
 
 export AWS_PAGER=""
+eval "$(gh copilot alias -- zsh)"
