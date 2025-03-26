@@ -63,4 +63,5 @@ setopt auto_cd
 export cdpath=(. ~ ~/src/)
 
 export AWS_PAGER=""
-eval "$(gh copilot alias -- zsh)"
+# eval "$(gh copilot alias -- zsh)"
+[[ -f ~/mt/monorepo/setup/.mt.zshrc ]] && source /Users/eric/mt/monorepo/setup/.mt.zshrc
