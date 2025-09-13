@@ -1,6 +1,7 @@
 [user]
 	email = eric@barendt.org
 	name = Eric Barendt
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6n7APsGxZU25H9IlfYSNWF9YbRIQK0bPPgzoTXhuf9
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --abbrev-commit
 	st = status
@@ -46,3 +47,5 @@
   side-by-side = true
 [fetch]
   prune = true
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign

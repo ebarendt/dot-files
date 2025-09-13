@@ -5,7 +5,7 @@ if [[ -a "/opt/homebrew/opt/fzf/bin/fzf" ]]; then
 	FZF_BIN_PATH="/opt/homebrew/opt/fzf/bin"
 elif [[ -a "/usr/share/fzf" ]]; then
 	# Linux
-	FZF_SHELL_PATH="/usr/share/fzf"
+	FZF_SHELL_PATH="/usr/share/fzf/shell"
 	# FZF_BIN_PATH not necessary since it'll be in /usr[/local]/bin
 elif [[ -a "/usr/share/doc/fzf" ]]; then
 	FZF_SHELL_PATH="/usr/share/doc/fzf/examples"
