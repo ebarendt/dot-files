@@ -6,7 +6,7 @@
 .tags_sorted_by_file
 *.swp
 .bundle
-dev-data
+**/dev-data
 .env
 .envrc
 test/dummy/.generators
@@ -14,3 +14,7 @@ test/dummy/.rakeTasks
 .generators
 .rakeTasks
 .tool-versions
+venv/
+CLAUDE.local.md
+.claude/settings.local.json
+.githooks/
