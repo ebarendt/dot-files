@@ -34,7 +34,9 @@ ZSH_THEME="afowler"
 # plugins=(git heroku)
 plugins=(brew direnv aws)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
+
+eval "$(starship init zsh)"
 
 set -o vi
 
@@ -62,9 +64,6 @@ autoload -U compinit; compinit
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
 
-setopt auto_cd
-export cdpath=(. ~ ~/src/)
-
 export AWS_PAGER=""
+
 # eval "$(gh copilot alias -- zsh)"
-[[ -f ~/mt/monorepo/setup/.mt.zshrc ]] && source /Users/eric/mt/monorepo/setup/.mt.zshrc
