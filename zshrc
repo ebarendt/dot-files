@@ -38,6 +38,14 @@ plugins=(brew direnv aws)
 
 eval "$(starship init zsh)"
 
+# File system
+if command -v eza &> /dev/null; then
+  alias ls='eza -lh --group-directories-first --icons=auto'
+  alias lsa='ls -a'
+  alias lt='eza --tree --level=2 --long --icons --git'
+  alias lta='lt -a'
+fi
+
 set -o vi
 
 alias glr="git pull --rebase"
@@ -67,3 +75,4 @@ autoload -U compinit; compinit
 export AWS_PAGER=""
 
 # eval "$(gh copilot alias -- zsh)"
+source /Users/eric/mt/monorepo/dev/setup/.mt.zshrc
