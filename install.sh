@@ -26,6 +26,15 @@ copy zshrc
 copy fzf.zsh
 copy gitignore_global
 
+# Neovim (LazyVim) config lives in a directory, not a dotfile, so link it directly.
+if [ ! -e ~/.config/nvim -a ! -L ~/.config/nvim ]; then
+  echo "Linking nvim"
+  mkdir -p ~/.config
+  ln -s $(pwd)/nvim ~/.config/nvim
+else
+  echo "Skipping nvim"
+fi
+
 if [ ! -f ~/.gitconfig ]; then
   cp gitconfig ~/.gitconfig
 fi
