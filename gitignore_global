@@ -17,4 +17,7 @@ test/dummy/.rakeTasks
 venv/
 CLAUDE.local.md
 .claude/settings.local.json
+*/.claude/settings.local.json
+.claude/worktrees/
 .githooks/
+opencode.json

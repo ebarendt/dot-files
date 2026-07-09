@@ -32,7 +32,7 @@ ZSH_THEME="afowler"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # plugins=(git heroku)
-plugins=(brew direnv aws)
+plugins=(brew direnv)
 
 #source $ZSH/oh-my-zsh.sh
 
@@ -75,4 +75,7 @@ autoload -U compinit; compinit
 export AWS_PAGER=""
 
 # eval "$(gh copilot alias -- zsh)"
-source /Users/eric/mt/monorepo/dev/setup/.mt.zshrc
+eval "$(mise activate zsh)"
+
+# opencode
+export PATH=/Users/eric/.opencode/bin:$PATH
