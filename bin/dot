@@ -22,7 +22,7 @@ Commands:
 EOF
 }
 
-trust() { env -u MISE_TRUSTED_CONFIG_PATHS mise trust "$repo/mise/config.toml"; }
+trust() { env -u MISE_GLOBAL_CONFIG_FILE -u MISE_TRUSTED_CONFIG_PATHS mise trust "$repo/mise/config.toml"; }
 
 cmd=${1:-help}
 [ $# -gt 0 ] && shift
