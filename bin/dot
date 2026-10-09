@@ -33,11 +33,19 @@ login_shell() {
   chsh -s "$fish"
 }
 
+setup() {
+  mise bootstrap "$@"
+  # "latest" is satisfied by whatever is installed, so bootstrap never upgrades
+  local dry=()
+  for a in "$@"; do [ "$a" = --dry-run ] && dry=(--dry-run); done
+  mise upgrade ${dry[@]+"${dry[@]}"}
+}
+
 cmd=${1:-help}
 [ $# -gt 0 ] && shift
 
 case "$cmd" in
-  setup)    trust; mise bootstrap "$@" ;;
+  setup)    trust; setup "$@" ;;
   trust)    trust ;;
   login-shell) login_shell ;;
   status)   mise bootstrap status "$@" ;;
