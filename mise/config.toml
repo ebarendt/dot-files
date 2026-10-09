@@ -25,8 +25,8 @@ _.path = ["~/src/dot-files/bin"]
 claude = "latest"
 codex = "latest"
 opencode = "latest"
-go = "1.25.1"
-ruby = "4.0.6"
+go = "1.27.1"
+ruby = "4.0.7"
 rust = "latest"
 uv = "latest"
 
