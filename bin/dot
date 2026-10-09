@@ -7,6 +7,18 @@ repo=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
 export MISE_GLOBAL_CONFIG_FILE="$repo/mise/config.toml"
 export MISE_TRUSTED_CONFIG_PATHS="$repo${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}"
 
+# Without a token GitHub allows only 60 API requests an hour, which `outdated`
+# and `upgrade` exceed. Take it from gh, but never through the ~/.local/bin/gh
+# wrapper or a mise shim: both call back into mise, which can recurse. Don't use
+# mise's github.credential_command for this, for the same reason.
+if [ -z "${MISE_GITHUB_TOKEN:-}${GITHUB_TOKEN:-}" ]; then
+  while IFS= read -r gh_bin; do
+    case "$gh_bin" in "$HOME"/.local/bin/*|*/mise/shims/*) continue ;; esac
+    MISE_GITHUB_TOKEN=$(timeout 5 "$gh_bin" auth token 2>/dev/null) && export MISE_GITHUB_TOKEN || unset MISE_GITHUB_TOKEN
+    break
+  done < <(type -ap gh)
+fi
+
 usage() {
   cat <<EOF
 Usage: dot <command> [args]
