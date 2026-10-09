@@ -69,7 +69,6 @@ awscli = "latest"
 "~/.vimrc" = "~/src/dot-files/vimrc"
 "~/.gitignore_global" = "~/src/dot-files/gitignore_global"
 "~/.gitconfig" = "~/src/dot-files/gitconfig"
-"~/.config/nvim" = "~/src/dot-files/nvim"
 "~/.config/ghostty/config" = "~/src/dot-files/ghostty/config"
 # dotfiles entries have no os filter; foot is only used on Linux, so on macOS this
 # is just an unused link
