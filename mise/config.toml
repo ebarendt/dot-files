@@ -5,10 +5,6 @@
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
 
-# gh keeps its token in the keyring, so mise can't read it itself; without a
-# token GitHub allows only 60 API requests an hour
-[settings.github]
-credential_command = "gh auth token"
 
 [settings.ruby]
 compile = false
