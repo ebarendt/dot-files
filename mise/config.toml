@@ -30,6 +30,7 @@ uv = "latest"
 starship = "latest"
 neovim = "latest"
 tmux = "latest"
+herdr = "latest"
 
 # git
 gh = "latest"
@@ -79,6 +80,9 @@ awscli = "latest"
 git-os-macos = { source = "~/src/dot-files/gitconfig.macos", variants = [{ os = "macos", target = "~/.gitconfig.os" }] }
 git-os-linux = { source = "~/src/dot-files/gitconfig.linux", variants = [{ os = "linux", target = "~/.gitconfig.os" }] }
 "~/.config/ghostty/config" = "~/src/dot-files/ghostty/config"
+"~/.config/herdr/config.toml" = "~/src/dot-files/herdr/config.toml"
+# `dot setup` registers the plugin with herdr (platforms = macos only)
+"~/.config/herdr/plugins/default-layout" = "~/src/dot-files/herdr/default-layout"
 # dotfiles entries have no os filter; foot is only used on Linux, so on macOS this
 # is just an unused link
 "~/.config/foot/foot.ini" = "~/src/dot-files/foot/foot.ini"

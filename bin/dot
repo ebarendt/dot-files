@@ -14,11 +14,12 @@ export MISE_TRUSTED_CONFIG_PATHS="$repo${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUST
 if [ -z "${MISE_GITHUB_TOKEN:-}${GITHUB_TOKEN:-}" ]; then
   # `mise which` only looks the path up, so it works without mise activated;
   # the PATH search covers a gh that mise doesn't manage (e.g. brew or pacman)
-  # stock macOS has no timeout(1), so only use it when present
+  # stock macOS has no timeout(1), so only use it when present. The ${a[@]+...}
+  # form is for macOS's bash 3.2, where an empty array is unbound under set -u
   timeout_cmd=(); command -v timeout >/dev/null && timeout_cmd=(timeout 5)
   while IFS= read -r gh_bin; do
     case "$gh_bin" in ''|"$HOME"/.local/bin/*|*/mise/shims/*) continue ;; esac
-    if MISE_GITHUB_TOKEN=$("${timeout_cmd[@]}" "$gh_bin" auth token 2>/dev/null) && [ -n "$MISE_GITHUB_TOKEN" ]; then
+    if MISE_GITHUB_TOKEN=$(${timeout_cmd[@]+"${timeout_cmd[@]}"} "$gh_bin" auth token 2>/dev/null) && [ -n "$MISE_GITHUB_TOKEN" ]; then
       export MISE_GITHUB_TOKEN
       break
     fi
@@ -57,7 +58,13 @@ setup() {
   # "latest" is satisfied by whatever is installed, so bootstrap never upgrades
   local dry=()
   for a in "$@"; do [ "$a" = --dry-run ] && dry=(--dry-run); done
-  mise upgrade "${dry[@]}"
+  mise upgrade ${dry[@]+"${dry[@]}"}
+  # register herdr's local plugin once the dotfiles are linked; mise which works
+  # even when mise isn't activated in this shell
+  local herdr
+  if [ ${#dry[@]} -eq 0 ] && herdr=$(mise which herdr 2>/dev/null || command -v herdr); then
+    "$herdr" plugin link ~/.config/herdr/plugins/default-layout >/dev/null || echo "dot: herdr plugin link failed" >&2
+  fi
 }
 
 cmd=${1:-help}

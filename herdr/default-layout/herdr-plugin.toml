@@ -1,0 +1,10 @@
+id = "eric.default-layout"
+name = "Default Layout"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Split new workspaces into a large left pane and a smaller right pane"
+platforms = ["macos"]
+
+[[events]]
+on = "workspace.created"
+command = ["sh", "split.sh"]
