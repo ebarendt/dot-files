@@ -14,6 +14,7 @@ Usage: dot <command> [args]
 Commands:
   setup     Install and update everything: packages, dotfiles, tools
             (pass --dry-run to preview)
+  trust     Trust this repo's mise config (setup does this too)
   status    Show what is out of sync with the dotfiles config
   diff      Show the dotfile changes setup would make
   outdated  Show tools that have updates
@@ -21,11 +22,14 @@ Commands:
 EOF
 }
 
+trust() { env -u MISE_TRUSTED_CONFIG_PATHS mise trust "$repo/mise/config.toml"; }
+
 cmd=${1:-help}
 [ $# -gt 0 ] && shift
 
 case "$cmd" in
-  setup)    mise bootstrap "$@" ;;
+  setup)    trust; mise bootstrap "$@" ;;
+  trust)    trust ;;
   status)   mise bootstrap status "$@" ;;
   diff)     mise dotfiles diff "$@" ;;
   outdated) mise outdated "$@" ;;
