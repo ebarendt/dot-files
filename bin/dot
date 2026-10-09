@@ -12,11 +12,18 @@ export MISE_TRUSTED_CONFIG_PATHS="$repo${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUST
 # wrapper or a mise shim: both call back into mise, which can recurse. Don't use
 # mise's github.credential_command for this, for the same reason.
 if [ -z "${MISE_GITHUB_TOKEN:-}${GITHUB_TOKEN:-}" ]; then
+  # `mise which` only looks the path up, so it works without mise activated;
+  # the PATH search covers a gh that mise doesn't manage (e.g. brew or pacman)
+  # stock macOS has no timeout(1)
+  timeout_cmd=(); command -v timeout >/dev/null && timeout_cmd=(timeout 5)
   while IFS= read -r gh_bin; do
-    case "$gh_bin" in "$HOME"/.local/bin/*|*/mise/shims/*) continue ;; esac
-    MISE_GITHUB_TOKEN=$(timeout 5 "$gh_bin" auth token 2>/dev/null) && export MISE_GITHUB_TOKEN || unset MISE_GITHUB_TOKEN
-    break
-  done < <(type -ap gh)
+    case "$gh_bin" in ''|"$HOME"/.local/bin/*|*/mise/shims/*) continue ;; esac
+    if MISE_GITHUB_TOKEN=$(${timeout_cmd[@]+"${timeout_cmd[@]}"} "$gh_bin" auth token 2>/dev/null) && [ -n "$MISE_GITHUB_TOKEN" ]; then
+      export MISE_GITHUB_TOKEN
+      break
+    fi
+    unset MISE_GITHUB_TOKEN
+  done < <(mise which gh 2>/dev/null; type -ap gh)
 fi
 
 usage() {
