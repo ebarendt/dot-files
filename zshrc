@@ -58,7 +58,7 @@ setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY
 SAVEHIST=100000
 
-export PATH="$HOME/.local/bin:$HOME/src/dot-files/bin:/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 export EDITOR=/usr/bin/vim
 
 #autoload bashcompinit

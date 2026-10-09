@@ -14,6 +14,7 @@ auto_prune = false
 [env]
 RUBY_CONFIGURE_OPTS = "--enable-yjit"
 AWS_PAGER = ""
+_.path = ["~/src/dot-files/bin"]
 
 [tools]
 claude = "latest"

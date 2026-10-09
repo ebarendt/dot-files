@@ -10,9 +10,9 @@ git clone <this repo> ~/src/dot-files
 ```
 
 `dot setup` refuses to overwrite existing files; move them aside (or run
-`mise dotfiles apply --force`) the first time. Put `~/src/dot-files/bin` on your
-PATH to use `dot` directly. Other commands: `dot status`, `dot diff`,
-`dot outdated`.
+`mise dotfiles apply --force`) the first time. After that mise puts `bin/` on
+your PATH (via `[env]`), so you can run `dot` directly in any shell with mise
+activated. Other commands: `dot status`, `dot diff`, `dot outdated`.
 
 # Keybindings (macOS)
 
