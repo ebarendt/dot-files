@@ -74,6 +74,10 @@ awscli = "latest"
 "~/.vimrc" = "~/src/dot-files/vimrc"
 "~/.gitignore_global" = "~/src/dot-files/gitignore_global"
 "~/.gitconfig" = "~/src/dot-files/gitconfig"
+# per-OS part of gitconfig (gpg signing program); machine-specific overrides go in
+# an untracked ~/.gitconfig.local
+git-os-macos = { source = "~/src/dot-files/gitconfig.macos", variants = [{ os = "macos", target = "~/.gitconfig.os" }] }
+git-os-linux = { source = "~/src/dot-files/gitconfig.linux", variants = [{ os = "linux", target = "~/.gitconfig.os" }] }
 "~/.config/ghostty/config" = "~/src/dot-files/ghostty/config"
 # dotfiles entries have no os filter; foot is only used on Linux, so on macOS this
 # is just an unused link
