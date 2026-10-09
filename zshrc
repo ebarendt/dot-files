@@ -53,6 +53,7 @@ alias gco="git co"
 alias gpr="git pull --rebase"
 alias gpm="git push origin master"
 alias be="bundle exec"
+alias t="tmux attach || tmux new -s Work"
 
 setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY

@@ -21,4 +21,4 @@ CLAUDE.local.md
 .claude/worktrees/
 .githooks/
 opencode.json
-docs/superpowers/
+**/docs/superpowers/
