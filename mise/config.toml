@@ -52,7 +52,7 @@ awscli = "latest"
 "brew:libpq" = { os = "macos" }
 "brew-cask:ghostty" = { os = "macos" }
 
-# Linux (Arch). Terminals (foot, ghostty) are managed by Omarchy.
+# Linux (Arch). Terminals (foot, ghostty) come with Omarchy.
 "pacman:git" = { os = "linux" }
 "pacman:git-lfs" = { os = "linux" }
 "pacman:zsh" = { os = "linux" }
@@ -69,6 +69,8 @@ awscli = "latest"
 "~/.gitignore_global" = "~/src/dot-files/gitignore_global"
 "~/.gitconfig" = "~/src/dot-files/gitconfig"
 "~/.config/nvim" = "~/src/dot-files/nvim"
+"~/.config/ghostty/config" = "~/src/dot-files/ghostty/config"
+"~/.config/foot/foot.ini" = "~/src/dot-files/foot/foot.ini"
 
 # mise's own global config
 "~/.config/mise/config.toml" = "~/src/dot-files/mise/config.toml"
