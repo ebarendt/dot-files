@@ -47,6 +47,7 @@ awscli = "latest"
 [bootstrap.packages]
 # macOS (Homebrew)
 "brew:git" = { os = "macos" }
+"brew:fish" = { os = "macos" }
 "brew:git-lfs" = { os = "macos" }
 "brew:coreutils" = { os = "macos" }
 "brew:colima" = { os = "macos" }
@@ -58,11 +59,12 @@ awscli = "latest"
 # Linux (Arch). Terminals (foot, ghostty) come with Omarchy.
 "pacman:git" = { os = "linux" }
 "pacman:git-lfs" = { os = "linux" }
-"pacman:zsh" = { os = "linux" }
+"pacman:fish" = { os = "linux" }
 "pacman:postgresql-libs" = { os = "linux" }
 
 [dotfiles]
 "~/.zshrc" = "~/src/dot-files/zshrc"
+"~/.config/fish/config.fish" = "~/src/dot-files/fish/config.fish"
 "~/.fzf.zsh" = "~/src/dot-files/fzf.zsh"
 "~/.tmux.conf" = "~/src/dot-files/tmux.conf"
 "~/.inputrc" = "~/src/dot-files/inputrc"
