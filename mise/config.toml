@@ -1,0 +1,74 @@
+# Global mise config for this repo. Preview with `mise dotfiles diff`, apply with
+# `mise dotfiles apply`, and set up a whole machine with `mise bootstrap`.
+# Paths assume the repo is checked out at ~/src/dot-files.
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+
+[settings.ruby]
+compile = false
+
+[settings.upgrade]
+auto_prune = false
+
+[env]
+RUBY_CONFIGURE_OPTS = "--enable-yjit"
+AWS_PAGER = ""
+
+[tools]
+claude = "latest"
+codex = "latest"
+opencode = "latest"
+go = "1.25.1"
+ruby = "4.0.6"
+rust = "latest"
+
+# shell and editor
+starship = "latest"
+neovim = "latest"
+tmux = "latest"
+
+# git
+gh = "latest"
+delta = "latest"
+lazygit = "latest"
+
+# misc
+jq = "latest"
+eza = "latest"
+
+# AWS
+awscli = "latest"
+"aqua:aws/session-manager-plugin" = "latest"
+
+[bootstrap.packages]
+# macOS (Homebrew)
+"brew:git" = { os = "macos" }
+"brew:git-lfs" = { os = "macos" }
+"brew:coreutils" = { os = "macos" }
+"brew:colima" = { os = "macos" }
+"brew:lima-additional-guestagents" = { os = "macos" }
+# native library for the pg gem
+"brew:libpq" = { os = "macos" }
+"brew-cask:ghostty" = { os = "macos" }
+
+# Linux (Arch). Terminals (foot, ghostty) are managed by Omarchy.
+"pacman:git" = { os = "linux" }
+"pacman:git-lfs" = { os = "linux" }
+"pacman:zsh" = { os = "linux" }
+"pacman:postgresql-libs" = { os = "linux" }
+
+[dotfiles]
+"~/.zshrc" = "~/src/dot-files/zshrc"
+"~/.fzf.zsh" = "~/src/dot-files/fzf.zsh"
+"~/.tmux.conf" = "~/src/dot-files/tmux.conf"
+"~/.inputrc" = "~/src/dot-files/inputrc"
+"~/.irbrc" = "~/src/dot-files/irbrc"
+"~/.gemrc" = "~/src/dot-files/gemrc"
+"~/.vimrc" = "~/src/dot-files/vimrc"
+"~/.gitignore_global" = "~/src/dot-files/gitignore_global"
+"~/.gitconfig" = "~/src/dot-files/gitconfig"
+"~/.config/nvim" = "~/src/dot-files/nvim"
+
+# mise's own global config
+"~/.config/mise/config.toml" = "~/src/dot-files/mise/config.toml"

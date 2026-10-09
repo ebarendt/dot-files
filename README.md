@@ -1,20 +1,22 @@
-# .vimrc Installation:
+# dot-files
+
+Managed with [mise](https://mise.jdx.dev). `mise/config.toml` declares the tools,
+system packages (Homebrew on macOS, pacman on Arch) and dotfile links.
 
 ```shell
-ln -s ~/src/dot-files/vimrc ~/.vimrc
-git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-
-from vim:
-:PackUpdate
+git clone <this repo> ~/src/dot-files
+MISE_GLOBAL_CONFIG_FILE=~/src/dot-files/mise/config.toml mise dotfiles diff   # preview
+MISE_GLOBAL_CONFIG_FILE=~/src/dot-files/mise/config.toml mise bootstrap       # apply
 ```
 
-# Keybindings:
+After the first apply, `~/.config/mise/config.toml` links back to this repo.
+
+# Keybindings (macOS)
 
 http://cobus.io/osx/2017/02/09/OSX_Home_End_Keys.html
 
 ```shell
-mkdir ~/Library/KeyBindings
-cp ~/src/dot-files/DefaultKeyBinding.dict ~/Library/Keybindings
-
+mkdir -p ~/Library/KeyBindings
+cp ~/src/dot-files/DefaultKeyBinding.dict ~/Library/KeyBindings
 # then reboot
 ```

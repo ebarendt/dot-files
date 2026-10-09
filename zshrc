@@ -58,11 +58,8 @@ setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY
 SAVEHIST=100000
 
-export ASDF_DATA_DIR=/home/eric/.asdf
-export PATH="$ASDF_DATA_DIR/shims:/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 export EDITOR=/usr/bin/vim
-
-export RUBY_CONFIGURE_OPTS=--enable-yjit
 
 #autoload bashcompinit
 #bashcompinit
@@ -71,8 +68,6 @@ autoload -U compinit; compinit
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
-
-export AWS_PAGER=""
 
 # eval "$(gh copilot alias -- zsh)"
 eval "$(mise activate zsh)"
