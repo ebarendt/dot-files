@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Wrapper around mise for this repo's dotfiles. Works from any directory, before
+# or after ~/.config/mise/config.toml is linked.
+set -euo pipefail
+
+repo=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
+export MISE_GLOBAL_CONFIG_FILE="$repo/mise/config.toml"
+export MISE_TRUSTED_CONFIG_PATHS="$repo${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}"
+
+usage() {
+  cat <<EOF
+Usage: dot <command> [args]
+
+Commands:
+  setup     Install and update everything: packages, dotfiles, tools
+            (pass --dry-run to preview)
+  status    Show what is out of sync with the dotfiles config
+  diff      Show the dotfile changes setup would make
+  outdated  Show tools that have updates
+  help      Show this list
+EOF
+}
+
+cmd=${1:-help}
+[ $# -gt 0 ] && shift
+
+case "$cmd" in
+  setup)    mise bootstrap "$@" ;;
+  status)   mise bootstrap status "$@" ;;
+  diff)     mise dotfiles diff "$@" ;;
+  outdated) mise outdated "$@" ;;
+  help|-h|--help) usage ;;
+  *) echo "dot: unknown command '$cmd'" >&2; usage >&2; exit 1 ;;
+esac

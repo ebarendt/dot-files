@@ -5,11 +5,14 @@ system packages (Homebrew on macOS, pacman on Arch) and dotfile links.
 
 ```shell
 git clone <this repo> ~/src/dot-files
-MISE_GLOBAL_CONFIG_FILE=~/src/dot-files/mise/config.toml mise dotfiles diff   # preview
-MISE_GLOBAL_CONFIG_FILE=~/src/dot-files/mise/config.toml mise bootstrap       # apply
+~/src/dot-files/bin/dot setup --dry-run   # preview
+~/src/dot-files/bin/dot setup             # apply
 ```
 
-After the first apply, `~/.config/mise/config.toml` links back to this repo.
+`dot setup` refuses to overwrite existing files; move them aside (or run
+`mise dotfiles apply --force`) the first time. Put `~/src/dot-files/bin` on your
+PATH to use `dot` directly. Other commands: `dot status`, `dot diff`,
+`dot outdated`.
 
 # Keybindings (macOS)
 
