@@ -40,7 +40,8 @@ eza = "latest"
 
 # AWS
 awscli = "latest"
-"aqua:aws/session-manager-plugin" = "latest"
+# the aqua package is macOS-only; on Arch it is in the AUR (aws-session-manager-plugin)
+"aqua:aws/session-manager-plugin" = { version = "latest", os = ["macos"] }
 
 [bootstrap.packages]
 # macOS (Homebrew)
