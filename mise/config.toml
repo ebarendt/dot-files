@@ -69,7 +69,10 @@ awscli = "latest"
 "~/.gitignore_global" = "~/src/dot-files/gitignore_global"
 "~/.gitconfig" = "~/src/dot-files/gitconfig"
 "~/.config/nvim" = "~/src/dot-files/nvim"
-"~/.config/ghostty/config" = "~/src/dot-files/ghostty/config"
+# rendered per OS (async-backend is Linux-only), so this is a copy, not a link
+"~/.config/ghostty/config" = { source = "~/src/dot-files/ghostty/config.tmpl", mode = "template" }
+# dotfiles entries have no os filter; foot is only used on Linux, so on macOS this
+# is just an unused link
 "~/.config/foot/foot.ini" = "~/src/dot-files/foot/foot.ini"
 
 # mise's own global config

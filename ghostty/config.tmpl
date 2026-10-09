@@ -33,5 +33,8 @@ keybind = super+control+shift+alt+arrow_right=resize_split:right,100
 # Slowdown mouse scrolling
 mouse-scroll-multiplier = 0.95
 
+{% if os() == "linux" -%}
 # Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
+# async-backend is Linux-only
 async-backend = epoll
+{%- endif %}
