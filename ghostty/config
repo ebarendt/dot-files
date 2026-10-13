@@ -36,3 +36,7 @@ mouse-scroll-multiplier = 0.95
 # Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
 # (ignored on macOS, which always uses kqueue)
 async-backend = epoll
+
+# Per-OS overrides (macOS font size); the file only exists where dot links it.
+# Keep last so it wins.
+config-file = ?"~/.config/ghostty/config-os"
