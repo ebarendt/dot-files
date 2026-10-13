@@ -72,7 +72,7 @@ awscli = "latest"
 "~/.tmux.conf" = "~/src/dot-files/tmux.conf"
 "~/.inputrc" = "~/src/dot-files/inputrc"
 "~/.irbrc" = "~/src/dot-files/irbrc"
-"~/.gemrc" = "~/src/dot-files/gemrc"
+"~/.gemrc" = { source = "~/src/dot-files/gemrc", mode = "template", permissions = "0600" } # appends untracked ~/.gemrc.local
 "~/.vimrc" = "~/src/dot-files/vimrc"
 "~/.gitignore_global" = "~/src/dot-files/gitignore_global"
 "~/.gitconfig" = "~/src/dot-files/gitconfig"
