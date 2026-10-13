@@ -85,6 +85,8 @@ ghostty-os-macos = { source = "~/src/dot-files/ghostty/config.macos", variants =
 "~/.config/herdr/config.toml" = "~/src/dot-files/herdr/config.toml"
 # `dot setup` registers the plugin with herdr (platforms = macos only)
 "~/.config/herdr/plugins/default-layout" = "~/src/dot-files/herdr/default-layout"
+# LazyVim config; macOS only, because Omarchy owns ~/.config/nvim on Linux
+nvim-macos = { source = "~/src/dot-files/nvim", variants = [{ os = "macos", target = "~/.config/nvim" }] }
 # dotfiles entries have no os filter; foot is only used on Linux, so on macOS this
 # is just an unused link
 "~/.config/foot/foot.ini" = "~/src/dot-files/foot/foot.ini"
