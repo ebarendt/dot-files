@@ -4,3 +4,6 @@ onboarding = false
 prefix = "ctrl+a"
 split_horizontal = "prefix+-"
 split_vertical = "prefix+|"
+# prefix+w workspace list: j/k move between workspaces
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
