@@ -47,5 +47,25 @@
   side-by-side = true
 [fetch]
   prune = true
-[gpg "ssh"]
-	program = /opt/1Password/op-ssh-sign
+[pull]
+	rebase = false
+	ff = only
+[rerere]
+	enabled = true
+[rebase]
+	autoStash = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+# Includes must stay last so they win. Missing files are ignored.
+[include]
+	path = ~/.gitconfig.os
+	path = ~/.gitconfig.local

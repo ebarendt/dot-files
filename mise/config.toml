@@ -1,0 +1,95 @@
+# Global mise config for this repo. Preview with `mise dotfiles diff`, apply with
+# `mise dotfiles apply`, and set up a whole machine with `mise bootstrap`.
+# Paths assume the repo is checked out at ~/src/dot-files.
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+
+
+[settings.ruby]
+compile = false
+
+[settings.upgrade]
+auto_prune = false
+
+[env]
+RUBY_CONFIGURE_OPTS = "--enable-yjit"
+AWS_PAGER = ""
+_.path = ["~/src/dot-files/bin"]
+
+[tools]
+claude = "latest"
+codex = "latest"
+opencode = "latest"
+go = "1.27.1"
+ruby = "4.0.7"
+rust = "latest"
+uv = "latest"
+
+# shell and editor
+starship = "latest"
+neovim = "latest"
+tmux = "latest"
+herdr = "latest"
+
+# git
+gh = "latest"
+delta = "latest"
+lazygit = "latest"
+
+# misc
+jq = "latest"
+eza = "latest"
+ripgrep = "latest"
+
+# AWS
+awscli = "latest"
+# the aqua package is macOS-only; on Arch it is in the AUR (aws-session-manager-plugin)
+"aqua:aws/session-manager-plugin" = { version = "latest", os = ["macos"] }
+
+[bootstrap.packages]
+# macOS (Homebrew)
+"brew:git" = { os = "macos" }
+"brew:fish" = { os = "macos" }
+"brew:git-lfs" = { os = "macos" }
+"brew:coreutils" = { os = "macos" }
+"brew:colima" = { os = "macos" }
+"brew:lima-additional-guestagents" = { os = "macos" }
+# native library for the pg gem
+"brew:libpq" = { os = "macos" }
+"brew-cask:ghostty" = { os = "macos" }
+
+# Linux (Arch). Terminals (foot, ghostty) come with Omarchy.
+"pacman:git" = { os = "linux" }
+"pacman:git-lfs" = { os = "linux" }
+"pacman:fish" = { os = "linux" }
+"pacman:postgresql-libs" = { os = "linux" }
+
+[dotfiles]
+"~/.zshrc" = "~/src/dot-files/zshrc"
+"~/.config/fish/config.fish" = "~/src/dot-files/fish/config.fish"
+"~/.fzf.zsh" = "~/src/dot-files/fzf.zsh"
+"~/.tmux.conf" = "~/src/dot-files/tmux.conf"
+"~/.inputrc" = "~/src/dot-files/inputrc"
+"~/.irbrc" = "~/src/dot-files/irbrc"
+"~/.gemrc" = { source = "~/src/dot-files/gemrc", mode = "template", permissions = "0600" } # appends untracked ~/.gemrc.local
+"~/.vimrc" = "~/src/dot-files/vimrc"
+"~/.gitignore_global" = "~/src/dot-files/gitignore_global"
+"~/.gitconfig" = "~/src/dot-files/gitconfig"
+# per-OS part of gitconfig (gpg signing program); machine-specific overrides go in
+# an untracked ~/.gitconfig.local
+git-os-macos = { source = "~/src/dot-files/gitconfig.macos", variants = [{ os = "macos", target = "~/.gitconfig.os" }] }
+git-os-linux = { source = "~/src/dot-files/gitconfig.linux", variants = [{ os = "linux", target = "~/.gitconfig.os" }] }
+"~/.config/ghostty/config" = "~/src/dot-files/ghostty/config"
+ghostty-os-macos = { source = "~/src/dot-files/ghostty/config.macos", variants = [{ os = "macos", target = "~/.config/ghostty/config-os" }] }
+"~/.config/herdr/config.toml" = "~/src/dot-files/herdr/config.toml"
+# `dot setup` registers the plugin with herdr (platforms = macos only)
+"~/.config/herdr/plugins/default-layout" = "~/src/dot-files/herdr/default-layout"
+# LazyVim config; macOS only, because Omarchy owns ~/.config/nvim on Linux
+nvim-macos = { source = "~/src/dot-files/nvim", variants = [{ os = "macos", target = "~/.config/nvim" }] }
+# dotfiles entries have no os filter; foot is only used on Linux, so on macOS this
+# is just an unused link
+"~/.config/foot/foot.ini" = "~/src/dot-files/foot/foot.ini"
+
+# mise's own global config
+"~/.config/mise/config.toml" = "~/src/dot-files/mise/config.toml"
