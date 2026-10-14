@@ -5,6 +5,9 @@ test -d $HOME/.opencode/bin; and fish_add_path -g $HOME/.opencode/bin
 fish_add_path -g $HOME/.local/bin
 
 set -gx EDITOR /usr/bin/vim
+test (uname) = Darwin; and set -gx OC_REFRESH_AUTH "mt auth"
+# No EC2 metadata on a laptop; without this an expired SSO session makes the AWS SDK retry IMDS for minutes before failing.
+set -gx AWS_EC2_METADATA_DISABLED true
 
 status is-interactive; or return
 
