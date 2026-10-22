@@ -36,6 +36,9 @@ Commands:
             (pass --dry-run to preview)
   login-shell
             Make fish your login shell (asks for your password)
+  mounts    Linux only: mount the diskstation SMB shares (~/ds, ~/public) via
+            /etc/fstab; uses sudo and asks for credentials if not yet saved
+            (pass --dry-run to preview)
   trust     Trust this repo's mise config (setup does this too)
   status    Show what is out of sync with the dotfiles config
   diff      Show the dotfile changes setup would make
@@ -51,6 +54,47 @@ login_shell() {
   fish=$(command -v fish) || { echo "dot: fish is not installed (run dot setup)" >&2; exit 1; }
   grep -qx "$fish" /etc/shells || echo "$fish" | sudo tee -a /etc/shells >/dev/null
   chsh -s "$fish"
+}
+
+mounts() {
+  if [ "$(uname -s)" != Linux ]; then
+    echo "dot: mounts is Linux only" >&2
+    exit 1
+  fi
+  local dry=0 creds=/etc/samba/credentials.d/diskstation snippet="$repo/linux/fstab-smb"
+  [ "${1:-}" = --dry-run ] && dry=1
+  run() { if [ $dry -eq 1 ]; then echo "would run: $*"; else "$@"; fi; }
+
+  command -v mount.cifs >/dev/null || run sudo pacman -S --needed cifs-utils
+
+  local line mountpoint
+  while IFS= read -r line; do
+    [ -n "$line" ] || continue
+    mountpoint=$(awk '{print $2}' <<<"$line")
+    run mkdir -p "$mountpoint"
+    if awk -v mp="$mountpoint" '$1 !~ /^#/ && $2 == mp {found=1} END {exit !found}' /etc/fstab; then
+      echo "dot: $mountpoint already in /etc/fstab"
+    elif [ $dry -eq 1 ]; then
+      echo "would append to /etc/fstab: $line"
+    else
+      echo "$line" | sudo tee -a /etc/fstab >/dev/null
+    fi
+  done <"$snippet"
+
+  if [ $dry -eq 1 ]; then
+    echo "would write $creds (mode 600) after prompting for username/password, unless it exists"
+  elif sudo test -f "$creds"; then
+    echo "dot: $creds exists"
+  else
+    local user pass
+    read -rp "diskstation username: " user
+    read -rsp "diskstation password: " pass; echo
+    sudo install -d -m 755 "$(dirname "$creds")"
+    printf 'username=%s\npassword=%s\n' "$user" "$pass" | sudo install -m 600 -o root -g root /dev/stdin "$creds"
+  fi
+
+  run sudo systemctl daemon-reload
+  run sudo systemctl restart remote-fs.target
 }
 
 setup() {
@@ -74,6 +118,7 @@ case "$cmd" in
   setup)    trust; setup "$@" ;;
   trust)    trust ;;
   login-shell) login_shell ;;
+  mounts)   mounts "$@" ;;
   status)   mise bootstrap status "$@" ;;
   diff)     mise dotfiles diff "$@" ;;
   outdated) mise outdated "$@" ;;
