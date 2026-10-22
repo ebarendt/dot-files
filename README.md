@@ -14,6 +14,14 @@ git clone <this repo> ~/src/dot-files
 your PATH (via `[env]`), so you can run `dot` directly in any shell with mise
 activated. Other commands: `dot status`, `dot diff`, `dot outdated`.
 
+# SMB shares (Linux)
+
+`dot mounts` adds the diskstation `home` and `public` shares to `/etc/fstab`
+(from `linux/fstab-smb`) as systemd automounts at `~/ds` and `~/public`. It uses
+sudo, and prompts once for the share credentials, which are stored in
+`/etc/samba/credentials.d/diskstation` and never in this repo. Safe to re-run;
+`dot mounts --dry-run` previews.
+
 # Keybindings (macOS)
 
 http://cobus.io/osx/2017/02/09/OSX_Home_End_Keys.html

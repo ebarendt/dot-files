@@ -1,0 +1,2 @@
+//diskstation/home /home/eric/ds cifs credentials=/etc/samba/credentials.d/diskstation,uid=1000,gid=1000,noauto,x-systemd.automount,x-systemd.mount-timeout=30,_netdev 0 0
+//diskstation/public /home/eric/public cifs credentials=/etc/samba/credentials.d/diskstation,uid=1000,gid=1000,noauto,x-systemd.automount,x-systemd.mount-timeout=30,_netdev 0 0

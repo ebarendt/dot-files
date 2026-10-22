@@ -63,6 +63,8 @@ awscli = "latest"
 "pacman:git" = { os = "linux" }
 "pacman:git-lfs" = { os = "linux" }
 "pacman:fish" = { os = "linux" }
+# SMB shares (`dot mounts`)
+"pacman:cifs-utils" = { os = "linux" }
 "pacman:postgresql-libs" = { os = "linux" }
 
 [dotfiles]
