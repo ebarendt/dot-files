@@ -21,10 +21,10 @@ _.path = ["~/src/dot-files/bin"]
 claude = "latest"
 codex = "latest"
 opencode = "latest"
-go = "1.27.1"
+go = "1.27.3"
 # opencode's npm package runs a node postinstall script
 node = "lts"
-ruby = "4.0.7"
+ruby = "4.0.8"
 rust = "latest"
 uv = "latest"
 
