@@ -94,6 +94,7 @@ nvim-macos = { source = "~/src/dot-files/nvim", variants = [{ os = "macos", targ
 # dotfiles entries have no os filter; foot is only used on Linux, so on macOS this
 # is just an unused link
 "~/.config/foot/foot.ini" = "~/src/dot-files/foot/foot.ini"
+"~/.config/alacritty/alacritty.toml" = "~/src/dot-files/alacritty/alacritty.toml"
 
 # mise's own global config
 "~/.config/mise/config.toml" = "~/src/dot-files/mise/config.toml"
