@@ -7,6 +7,9 @@ repo=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
 export MISE_GLOBAL_CONFIG_FILE="$repo/mise/config.toml"
 export MISE_TRUSTED_CONFIG_PATHS="$repo${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}"
 
+# mise.run installs to ~/.local/bin, which a fresh shell may not have on PATH
+command -v mise >/dev/null || [ ! -x "$HOME/.local/bin/mise" ] || export PATH="$HOME/.local/bin:$PATH"
+
 # Without a token GitHub allows only 60 API requests an hour, which `outdated`
 # and `upgrade` exceed. Take it from gh, but never through the ~/.local/bin/gh
 # wrapper or a mise shim: both call back into mise, which can recurse. Don't use
@@ -50,6 +53,21 @@ Commands:
   outdated  Show tools that have updates
   help      Show this list
 EOF
+}
+
+# Fresh machines don't have mise yet; install it with the official installer
+ensure_mise() {
+  command -v mise >/dev/null && return
+  local a
+  for a in "$@"; do
+    if [ "$a" = --dry-run ]; then
+      echo "would install mise to ~/.local/bin (https://mise.run); the rest of the dry run needs mise"
+      exit 0
+    fi
+  done
+  echo "dot: installing mise to ~/.local/bin"
+  curl -fsSL https://mise.run | sh
+  export PATH="$HOME/.local/bin:$PATH"
 }
 
 trust() { env -u MISE_GLOBAL_CONFIG_FILE -u MISE_TRUSTED_CONFIG_PATHS mise trust "$repo/mise/config.toml"; }
@@ -208,7 +226,7 @@ cmd=${1:-help}
 [ $# -gt 0 ] && shift
 
 case "$cmd" in
-  setup)    trust; setup "$@" ;;
+  setup)    ensure_mise "$@"; trust; setup "$@" ;;
   trust)    trust ;;
   login-shell) login_shell ;;
   mounts)   mounts "$@" ;;

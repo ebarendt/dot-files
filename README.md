@@ -3,6 +3,10 @@
 Managed with [mise](https://mise.jdx.dev). `mise/config.toml` declares the tools,
 system packages (Homebrew on macOS, pacman on Arch) and dotfile links.
 
+You only need git and curl. If mise is missing, `dot setup` installs it to
+`~/.local/bin` with the official installer (https://mise.run); update it later
+with `mise self-update`.
+
 ```shell
 git clone <this repo> ~/src/dot-files
 ~/src/dot-files/bin/dot setup --dry-run   # preview
