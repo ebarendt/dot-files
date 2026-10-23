@@ -12,9 +12,19 @@ git clone <this repo> ~/src/dot-files
 `dot setup` refuses to overwrite existing files; move them aside (or run
 `mise dotfiles apply --force`) the first time. The exception is the stock niri
 and noctalia configs a fresh CachyOS install copies from `/etc/skel`: setup
-removes those itself, as long as they still match `/etc/skel`. After that mise puts `bin/` on
-your PATH (via `[env]`), so you can run `dot` directly in any shell with mise
-activated. Other commands: `dot status`, `dot diff`, `dot outdated`.
+removes those itself, as long as they still match `/etc/skel`. After that mise
+puts `bin/` on your PATH (via `[env]`), so you can run `dot` directly in any
+shell with mise activated. Other commands: `dot status`, `dot diff`,
+`dot outdated`.
+
+On a new Linux (CachyOS) machine, after `dot setup` (details below):
+
+```shell
+dot hibernate          # then test: systemctl hibernate
+dot fingerprint
+fprintd-enroll         # then check: fprintd-verify
+dot mounts             # optional: diskstation SMB shares
+```
 
 # SMB shares (Linux)
 
@@ -37,8 +47,9 @@ Test with `systemctl hibernate` before relying on it.
 CachyOS already allows fingerprint for `sudo`, and `noctalia/config.toml` turns
 on fingerprint unlock for the lock screen. `dot fingerprint` (sudo) installs
 `linux/pam.d/polkit-1`, so polkit prompts take a fingerprint too; that's what
-1Password's "Unlock using system authentication" uses. Fingerprints aren't stored here, so
-run `fprintd-enroll` on each machine, then `fprintd-verify`. If enroll reports
+1Password's "Unlock using system authentication" uses. Fingerprints aren't
+stored here, so run `fprintd-enroll` on each machine, then `fprintd-verify`. If
+enroll reports
 "Finger was already enrolled", the Goodix sensor still holds prints from an
 earlier install: stop fprintd and wipe them with libfprint's
 `FPrint.Device.clear_storage_sync()` (as root, via python3-gobject), then
