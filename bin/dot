@@ -39,6 +39,8 @@ Commands:
   mounts    Linux only: mount the diskstation SMB shares (~/ds, ~/public) via
             /etc/fstab; uses sudo and asks for credentials if not yet saved
             (pass --dry-run to preview)
+  hibernate Linux only: add a btrfs swapfile and make closing the lid suspend,
+            then hibernate after 30 minutes; uses sudo (pass --dry-run to preview)
   trust     Trust this repo's mise config (setup does this too)
   status    Show what is out of sync with the dotfiles config
   diff      Show the dotfile changes setup would make
@@ -97,11 +99,84 @@ mounts() {
   run sudo systemctl restart remote-fs.target
 }
 
+hibernate() {
+  if [ "$(uname -s)" != Linux ]; then
+    echo "dot: hibernate is Linux only" >&2
+    exit 1
+  fi
+  local dry=0
+  [ "${1:-}" = --dry-run ] && dry=1
+  run() { if [ $dry -eq 1 ]; then echo "would run: $*"; else "$@"; fi; }
+  append_fstab() {
+    if [ $dry -eq 1 ]; then echo "would append to /etc/fstab: $1"
+    else echo "$1" | sudo tee -a /etc/fstab >/dev/null; fi
+  }
+
+  # zram swap is lost on power off, so hibernation needs a swapfile on disk. It
+  # lives in its own top-level @swap subvolume so snapper snapshots of @ skip it
+  local uuid
+  uuid=$(findmnt -no UUID /)
+  [ "$(findmnt -no FSTYPE /)" = btrfs ] || { echo "dot: / is not btrfs" >&2; exit 1; }
+  if grep -q 'subvol=/@swap' /etc/fstab; then
+    echo "dot: /swap already in /etc/fstab"
+  else
+    local top
+    top=$(mktemp -d)
+    run sudo mount -o subvolid=5 "UUID=$uuid" "$top"
+    if [ $dry -eq 1 ] || ! sudo test -d "$top/@swap"; then run sudo btrfs subvolume create "$top/@swap"; fi
+    run sudo umount "$top"
+    rmdir "$top"
+    run sudo mkdir -p /swap
+    append_fstab "UUID=$uuid /swap          btrfs   subvol=/@swap,defaults,noatime 0 0"
+    run sudo systemctl daemon-reload
+    run sudo mount /swap
+  fi
+
+  # RAM size plus headroom; mkswapfile sets nocow and disables compression
+  local size_g
+  size_g=$(awk '/^MemTotal:/ {print int($2 / 1048576) + 3}' /proc/meminfo)
+  if [ -f /swap/swapfile ]; then
+    echo "dot: /swap/swapfile exists"
+  else
+    run sudo btrfs filesystem mkswapfile --size "${size_g}g" /swap/swapfile
+  fi
+  if grep -q '^/swap/swapfile' /etc/fstab; then
+    echo "dot: /swap/swapfile already in /etc/fstab"
+  else
+    append_fstab "/swap/swapfile                            none           swap    defaults 0 0"
+  fi
+  swapon --show=NAME --noheadings | grep -qx /swap/swapfile || run sudo swapon /swap/swapfile
+
+  run sudo install -Dm644 "$repo/linux/systemd/sleep.conf.d/hibernate-delay.conf" /etc/systemd/sleep.conf.d/hibernate-delay.conf
+  run sudo install -Dm644 "$repo/linux/systemd/logind.conf.d/lid.conf" /etc/systemd/logind.conf.d/lid.conf
+  # HUP reloads logind's config; restarting it would end the session
+  run sudo systemctl kill -s HUP systemd-logind
+}
+
+# A fresh CachyOS install copies stock niri and noctalia configs from /etc/skel,
+# which mise refuses to replace. Remove them, but only while they still match
+# /etc/skel exactly, so nothing edited is lost.
+remove_stock_configs() {
+  local dry=0 path
+  [ "${1:-}" = --dry-run ] && dry=1
+  for path in .config/niri .config/noctalia/config.toml; do
+    [ -e "$HOME/$path" ] && [ ! -L "$HOME/$path" ] && [ -e "/etc/skel/$path" ] || continue
+    diff -r "/etc/skel/$path" "$HOME/$path" >/dev/null || continue
+    if [ $dry -eq 1 ]; then
+      echo "would remove stock ~/$path (same as /etc/skel)"
+    else
+      echo "dot: removing stock ~/$path (same as /etc/skel)"
+      rm -rf "${HOME:?}/$path"
+    fi
+  done
+}
+
 setup() {
+  local a dry=()
+  for a in "$@"; do [ "$a" = --dry-run ] && dry=(--dry-run); done
+  remove_stock_configs ${dry[@]+"${dry[@]}"}
   mise bootstrap "$@"
   # "latest" is satisfied by whatever is installed, so bootstrap never upgrades
-  local dry=()
-  for a in "$@"; do [ "$a" = --dry-run ] && dry=(--dry-run); done
   mise upgrade ${dry[@]+"${dry[@]}"}
   # register herdr's local plugin once the dotfiles are linked; mise which works
   # even when mise isn't activated in this shell
@@ -119,6 +194,7 @@ case "$cmd" in
   trust)    trust ;;
   login-shell) login_shell ;;
   mounts)   mounts "$@" ;;
+  hibernate) hibernate "$@" ;;
   status)   mise bootstrap status "$@" ;;
   diff)     mise dotfiles diff "$@" ;;
   outdated) mise outdated "$@" ;;

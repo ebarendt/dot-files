@@ -1,0 +1,5 @@
+[shell]
+polkit_agent = true
+
+[lockscreen]
+fingerprint = true
