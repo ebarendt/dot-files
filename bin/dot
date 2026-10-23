@@ -41,6 +41,9 @@ Commands:
             (pass --dry-run to preview)
   hibernate Linux only: add a btrfs swapfile and make closing the lid suspend,
             then hibernate after 30 minutes; uses sudo (pass --dry-run to preview)
+  fingerprint
+            Linux only: let polkit prompts (1Password unlock) take a
+            fingerprint; uses sudo (pass --dry-run to preview)
   trust     Trust this repo's mise config (setup does this too)
   status    Show what is out of sync with the dotfiles config
   diff      Show the dotfile changes setup would make
@@ -153,6 +156,21 @@ hibernate() {
   run sudo systemctl kill -s HUP systemd-logind
 }
 
+fingerprint() {
+  if [ "$(uname -s)" != Linux ]; then
+    echo "dot: fingerprint is Linux only" >&2
+    exit 1
+  fi
+  local dry=0
+  [ "${1:-}" = --dry-run ] && dry=1
+  run() { if [ $dry -eq 1 ]; then echo "would run: $*"; else "$@"; fi; }
+
+  # /etc/pam.d overrides the package's /usr/lib/pam.d/polkit-1
+  run sudo install -Dm644 "$repo/linux/pam.d/polkit-1" /etc/pam.d/polkit-1
+  fprintd-list "$USER" 2>/dev/null | grep -q ' - #' ||
+    echo "dot: no fingerprints enrolled yet; run fprintd-enroll"
+}
+
 # A fresh CachyOS install copies stock niri and noctalia configs from /etc/skel,
 # which mise refuses to replace. Remove them, but only while they still match
 # /etc/skel exactly, so nothing edited is lost.
@@ -195,6 +213,7 @@ case "$cmd" in
   login-shell) login_shell ;;
   mounts)   mounts "$@" ;;
   hibernate) hibernate "$@" ;;
+  fingerprint) fingerprint "$@" ;;
   status)   mise bootstrap status "$@" ;;
   diff)     mise dotfiles diff "$@" ;;
   outdated) mise outdated "$@" ;;

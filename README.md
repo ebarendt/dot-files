@@ -35,7 +35,9 @@ Test with `systemctl hibernate` before relying on it.
 # Fingerprint (Linux)
 
 CachyOS already allows fingerprint for `sudo`, and `noctalia/config.toml` turns
-on fingerprint unlock for the lock screen. Fingerprints aren't stored here, so
+on fingerprint unlock for the lock screen. `dot fingerprint` (sudo) installs
+`linux/pam.d/polkit-1`, so polkit prompts take a fingerprint too; that's what
+1Password's "Unlock using system authentication" uses. Fingerprints aren't stored here, so
 run `fprintd-enroll` on each machine, then `fprintd-verify`. If enroll reports
 "Finger was already enrolled", the Goodix sensor still holds prints from an
 earlier install: stop fprintd and wipe them with libfprint's

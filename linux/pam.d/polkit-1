@@ -1,0 +1,9 @@
+#%PAM-1.0
+# /usr/lib/pam.d/polkit-1 plus fingerprint, so polkit prompts (1Password's
+# system unlock, pkexec) take a finger; a password still works
+
+auth       sufficient   pam_fprintd.so
+auth       include      system-auth
+account    include      system-auth
+password   include      system-auth
+session    include      system-auth
