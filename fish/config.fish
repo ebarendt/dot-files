@@ -1,4 +1,5 @@
 # Fish equivalent of zshrc. Linked to ~/.config/fish/config.fish by mise.
+test -x /opt/homebrew/bin/brew; and /opt/homebrew/bin/brew shellenv fish | source
 fish_add_path -g /usr/local/bin
 test -d /opt/homebrew/opt/libpq/bin; and fish_add_path -g /opt/homebrew/opt/libpq/bin
 test -d $HOME/.opencode/bin; and fish_add_path -g $HOME/.opencode/bin
