@@ -26,6 +26,7 @@ On a new Linux (CachyOS) machine, after `dot setup` (details below):
 ```shell
 dot hibernate          # then test: systemctl hibernate
 dot fingerprint
+dot docker             # then log out and back in
 fprintd-enroll         # then check: fprintd-verify
 dot mounts             # optional: diskstation SMB shares
 ```
@@ -45,6 +46,13 @@ sudo, and prompts once for the share credentials, which are stored in
 subvolume at `/swap` with a swapfile a little larger than RAM; zram stays the
 higher-priority swap. It uses sudo, is safe to re-run, and `--dry-run` previews.
 Test with `systemctl hibernate` before relying on it.
+
+# Docker (Linux)
+
+`dot setup` installs docker, compose and buildx. `dot docker` (sudo) enables
+`docker.socket`, so the daemon starts on first use, and adds you to the `docker`
+group; log out and back in for the group to apply. Safe to re-run, and
+`--dry-run` previews. The group is effectively root on the machine.
 
 # Fingerprint (Linux)
 

@@ -47,6 +47,8 @@ Commands:
   fingerprint
             Linux only: let polkit prompts (1Password unlock) take a
             fingerprint; uses sudo (pass --dry-run to preview)
+  docker    Linux only: enable the docker socket and add you to the docker group;
+            uses sudo (pass --dry-run to preview)
   trust     Trust this repo's mise config (setup does this too)
   status    Show what is out of sync with the dotfiles config
   diff      Show the dotfile changes setup would make
@@ -189,6 +191,27 @@ fingerprint() {
     echo "dot: no fingerprints enrolled yet; run fprintd-enroll"
 }
 
+docker() {
+  if [ "$(uname -s)" != Linux ]; then
+    echo "dot: docker is Linux only" >&2
+    exit 1
+  fi
+  local dry=0
+  [ "${1:-}" = --dry-run ] && dry=1
+  run() { if [ $dry -eq 1 ]; then echo "would run: $*"; else "$@"; fi; }
+
+  command -v dockerd >/dev/null || { echo "dot: docker is not installed (run dot setup)" >&2; exit 1; }
+  # socket activation starts the daemon on first use
+  systemctl is-enabled --quiet docker.socket || run sudo systemctl enable --now docker.socket
+  # the group only applies to new login sessions
+  if id -nG "$USER" | tr ' ' '\n' | grep -qx docker; then
+    echo "dot: $USER is already in the docker group"
+  else
+    run sudo usermod -aG docker "$USER"
+    echo "dot: log out and back in for the docker group to apply"
+  fi
+}
+
 # A fresh CachyOS install copies stock niri and noctalia configs from /etc/skel,
 # which mise refuses to replace. Remove them, but only while they still match
 # /etc/skel exactly, so nothing edited is lost.
@@ -234,6 +257,7 @@ case "$cmd" in
   mounts)   mounts "$@" ;;
   hibernate) hibernate "$@" ;;
   fingerprint) fingerprint "$@" ;;
+  docker)   docker "$@" ;;
   status)   mise bootstrap status "$@" ;;
   diff)     mise dotfiles diff "$@" ;;
   outdated) mise outdated "$@" ;;
