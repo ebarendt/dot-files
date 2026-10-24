@@ -68,6 +68,11 @@ awscli = "latest"
 # SMB shares (`dot mounts`)
 "pacman:cifs-utils" = { os = "linux" }
 "pacman:postgresql-libs" = { os = "linux" }
+# docker pulls in containerd and runc itself; the daemon needs enabling by hand
+# (sudo systemctl enable --now docker.socket; sudo usermod -aG docker $USER)
+"pacman:docker" = { os = "linux" }
+"pacman:docker-compose" = { os = "linux" }
+"pacman:docker-buildx" = { os = "linux" }
 
 [dotfiles]
 "~/.zshrc" = "~/src/dot-files/zshrc"
