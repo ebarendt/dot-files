@@ -14,6 +14,8 @@ input {
 
     touchpad {
         tap // Enable tap-to-click
+        dwt // Ignore the touchpad while typing
+        click-method "clickfinger" // Physical click depends on finger count, not where on the pad
         //natural-scroll // Enable natural (macOS-style) scrolling
     }
 
