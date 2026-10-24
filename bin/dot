@@ -214,6 +214,8 @@ setup() {
   mise bootstrap "$@"
   # "latest" is satisfied by whatever is installed, so bootstrap never upgrades
   mise upgrade ${dry[@]+"${dry[@]}"}
+  # drop the versions upgrade left behind
+  mise prune ${dry[@]+"${dry[@]}"}
   # register herdr's local plugin once the dotfiles are linked; mise which works
   # even when mise isn't activated in this shell
   local herdr
