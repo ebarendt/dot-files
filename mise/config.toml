@@ -4,6 +4,7 @@
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
+minimum_release_age_excludes = ["gem:mt-console"]
 
 
 [settings.ruby]
@@ -11,6 +12,9 @@ compile = false
 
 [settings.upgrade]
 auto_prune = false
+
+[settings.github]
+credential_command = '"/opt/homebrew/bin/mise" exec gh -- gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
 
 [env]
 RUBY_CONFIGURE_OPTS = "--enable-yjit"
@@ -48,6 +52,8 @@ ripgrep = "latest"
 awscli = "latest"
 # the aqua package is macOS-only; on Arch it is in the AUR (aws-session-manager-plugin)
 "aqua:aws/session-manager-plugin" = { version = "latest", os = ["macos"] }
+terraform = "1.15.4"
+"gem:mt-console" = { version = "latest", source = "https://rubygems.pkg.github.com/modern-treasury" }
 
 [bootstrap.packages]
 # macOS (Homebrew)

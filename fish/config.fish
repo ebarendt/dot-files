@@ -10,6 +10,7 @@ test (uname) = Darwin; and set -gx OC_REFRESH_AUTH "mt auth"
 # No EC2 metadata on a laptop; without this an expired SSO session makes the AWS SDK retry IMDS for minutes before failing.
 set -gx AWS_EC2_METADATA_DISABLED true
 
+type -q mise; and not status is-interactive; and mise activate fish --shims | source
 status is-interactive; or return
 
 set -g fish_greeting
