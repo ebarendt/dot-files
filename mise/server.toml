@@ -1,0 +1,13 @@
+# Overlay for headless Debian/Ubuntu servers: skips the desktop (GUI) configs.
+# On Debian, `dot setup` links it to ~/.config/mise/config.local.toml, which
+# mise loads after config.toml; delete that link to deploy everything again.
+
+[dotfiles]
+"~/.config/ghostty/config" = { source = "~/src/dot-files/ghostty/config", enabled = false }
+"~/.config/foot/foot.ini" = { source = "~/src/dot-files/foot/foot.ini", enabled = false }
+"~/.config/alacritty/alacritty.toml" = { source = "~/src/dot-files/alacritty/alacritty.toml", enabled = false }
+"~/.config/niri" = { source = "~/src/dot-files/niri", enabled = false }
+"~/.config/noctalia/config.toml" = { source = "~/src/dot-files/noctalia/config.toml", enabled = false }
+
+# 1Password's op-ssh-sign isn't on servers; sign through the forwarded agent
+git-os-linux = { source = "~/src/dot-files/gitconfig.server", variants = [{ os = "linux", target = "~/.gitconfig.os" }] }

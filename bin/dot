@@ -4,7 +4,25 @@
 set -euo pipefail
 
 repo=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
-export MISE_GLOBAL_CONFIG_FILE="$repo/mise/config.toml"
+# Run from $HOME: in the repo, mise would also load mise/config.toml as a project
+# config, which outranks config.local.toml and undoes the server overlay (and
+# from any other project, its mise config would leak into setup)
+cd "$HOME"
+mise_dir=${MISE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/mise}
+# Debian/Ubuntu machines are headless servers here; see mise/server.toml
+is_server() { [ -f /etc/debian_version ]; }
+
+# Point mise at the repo's config until ~/.config/mise/config.toml links to it.
+# Once it does, leave mise to find it there: MISE_GLOBAL_CONFIG_FILE makes mise
+# ignore config.local.toml, which carries the server overlay.
+use_repo_config() {
+  if [ "$(readlink -f "$mise_dir/config.toml" 2>/dev/null)" = "$repo/mise/config.toml" ]; then
+    unset MISE_GLOBAL_CONFIG_FILE
+  else
+    export MISE_GLOBAL_CONFIG_FILE="$repo/mise/config.toml"
+  fi
+}
+use_repo_config
 export MISE_TRUSTED_CONFIG_PATHS="$repo${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}"
 
 # mise.run installs to ~/.local/bin, which a fresh shell may not have on PATH
@@ -45,7 +63,7 @@ Commands:
   hibernate Linux only: add a btrfs swapfile and make closing the lid suspend,
             then hibernate after 30 minutes; uses sudo (pass --dry-run to preview)
   fingerprint
-            Linux only: let polkit prompts (1Password unlock) take a
+            Arch only: let polkit prompts (1Password unlock) take a
             fingerprint; uses sudo (pass --dry-run to preview)
   docker    Linux only: enable the docker socket and add you to the docker group;
             uses sudo (pass --dry-run to preview)
@@ -90,7 +108,10 @@ mounts() {
   [ "${1:-}" = --dry-run ] && dry=1
   run() { if [ $dry -eq 1 ]; then echo "would run: $*"; else "$@"; fi; }
 
-  command -v mount.cifs >/dev/null || run sudo pacman -S --needed cifs-utils
+  if ! command -v mount.cifs >/dev/null; then
+    if command -v pacman >/dev/null; then run sudo pacman -S --needed cifs-utils
+    else run sudo apt-get install -y cifs-utils; fi
+  fi
 
   local line mountpoint
   while IFS= read -r line; do
@@ -185,6 +206,15 @@ fingerprint() {
   [ "${1:-}" = --dry-run ] && dry=1
   run() { if [ $dry -eq 1 ]; then echo "would run: $*"; else "$@"; fi; }
 
+  # linux/pam.d/polkit-1 includes Arch's system-auth. Debian/Ubuntu have
+  # common-auth instead, so installing it there would break polkit; use
+  # libpam-fprintd and pam-auth-update there, which covers polkit too.
+  if [ ! -f /etc/pam.d/system-auth ]; then
+    echo "dot: fingerprint expects Arch's /etc/pam.d/system-auth; on Debian/Ubuntu run" >&2
+    echo "     sudo apt install libpam-fprintd && sudo pam-auth-update --enable fprintd" >&2
+    exit 1
+  fi
+
   # /etc/pam.d overrides the package's /usr/lib/pam.d/polkit-1
   run sudo install -Dm644 "$repo/linux/pam.d/polkit-1" /etc/pam.d/polkit-1
   fprintd-list "$USER" 2>/dev/null | grep -q ' - #' ||
@@ -230,9 +260,32 @@ remove_stock_configs() {
   done
 }
 
+# Link mise's own config (and, on a server, the overlay that skips the GUI
+# configs) before bootstrap, so the overlay already applies on the first run.
+# Existing files are left alone.
+link_mise_configs() {
+  local dry=0 target src
+  [ "${1:-}" = --dry-run ] && dry=1
+  local links=("config.toml:$repo/mise/config.toml")
+  is_server && links+=("config.local.toml:$repo/mise/server.toml")
+  for target in "${links[@]}"; do
+    src=${target#*:} target="$mise_dir/${target%%:*}"
+    [ -e "$target" ] || [ -L "$target" ] && continue
+    if [ $dry -eq 1 ]; then
+      echo "would link $target -> $src"
+    else
+      echo "dot: linking $target -> $src"
+      mkdir -p "$mise_dir"
+      ln -s "$src" "$target"
+    fi
+  done
+  use_repo_config
+}
+
 setup() {
   local a dry=()
   for a in "$@"; do [ "$a" = --dry-run ] && dry=(--dry-run); done
+  link_mise_configs ${dry[@]+"${dry[@]}"}
   remove_stock_configs ${dry[@]+"${dry[@]}"}
   mise bootstrap "$@"
   # "latest" is satisfied by whatever is installed, so bootstrap never upgrades

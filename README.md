@@ -1,7 +1,9 @@
 # dot-files
 
 Managed with [mise](https://mise.jdx.dev). `mise/config.toml` declares the tools,
-system packages (Homebrew on macOS, pacman on Arch) and dotfile links.
+system packages (Homebrew on macOS, pacman on Arch, apt on Debian/Ubuntu) and
+dotfile links. mise skips a package manager that isn't installed, so the pacman
+and apt lists can sit side by side.
 
 You only need git and curl. If mise is missing, `dot setup` installs it to
 `~/.local/bin` with the official installer (https://mise.run); update it later
@@ -29,6 +31,23 @@ dot fingerprint
 dot docker             # then log out and back in
 fprintd-enroll         # then check: fprintd-verify
 dot mounts             # optional: diskstation SMB shares
+```
+
+Debian/Ubuntu machines are treated as headless servers: `dot setup` links
+`~/.config/mise/config.local.toml` to `mise/server.toml`, which turns off the
+GUI configs (ghostty, foot, alacritty, niri, noctalia). mise loads it after
+`config.toml`, except when run from inside this repo, where `mise/config.toml`
+also loads as a project config and wins; `dot` always runs from `$HOME`, so use
+`dot` rather than bare `mise dot apply` there. `dot docker` works as on Arch.
+`dot hibernate` needs btrfs and `dot fingerprint` needs Arch's PAM layout, so
+both refuse elsewhere. Servers have no 1Password app, so the overlay swaps
+`gitconfig.linux` for `gitconfig.server`, which signs commits with `ssh-keygen`
+through the agent forwarded from your desktop (`ssh -A`). On a server you reach
+without a forwarded agent, turn signing off in an untracked `~/.gitconfig.local`:
+
+```ini
+[commit]
+	gpgsign = false
 ```
 
 # SMB shares (Linux)

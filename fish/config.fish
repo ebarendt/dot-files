@@ -36,7 +36,14 @@ alias be 'bundle exec'
 
 # fzf key bindings and completion; use rg for file lists when available
 if type -q fzf
-    fzf --fish | source
+    # `fzf --fish` needs fzf 0.48+; older Debian/Ubuntu fzf ships the script instead
+    set -l fzf_init (fzf --fish 2>/dev/null)
+    if test -n "$fzf_init"
+        string join \n -- $fzf_init | source
+    else if test -f /usr/share/doc/fzf/examples/key-bindings.fish
+        source /usr/share/doc/fzf/examples/key-bindings.fish
+        fzf_key_bindings
+    end
     if type -q rg
         set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
     end

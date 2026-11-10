@@ -67,7 +67,7 @@ terraform = "1.15.4"
 "brew:libpq" = { os = "macos" }
 "brew-cask:ghostty" = { os = "macos" }
 
-# Linux (Arch). Terminals (foot, ghostty) come with Omarchy.
+# Linux (Arch; skipped where pacman is missing). Terminals (foot, ghostty) come with Omarchy.
 "pacman:git" = { os = "linux" }
 "pacman:git-lfs" = { os = "linux" }
 "pacman:fish" = { os = "linux" }
@@ -78,6 +78,19 @@ terraform = "1.15.4"
 "pacman:docker" = { os = "linux" }
 "pacman:docker-compose" = { os = "linux" }
 "pacman:docker-buildx" = { os = "linux" }
+
+# Linux (Debian/Ubuntu). There is no distro filter, but mise skips a package
+# manager that isn't installed, so Arch skips these and Debian skips pacman.
+"apt:git" = { os = "linux" }
+"apt:git-lfs" = { os = "linux" }
+"apt:fish" = { os = "linux" }
+"apt:fzf" = { os = "linux" }
+"apt:cifs-utils" = { os = "linux" }
+# native library for the pg gem (headers plus pg_config)
+"apt:libpq-dev" = { os = "linux" }
+"apt:docker.io" = { os = "linux" }
+"apt:docker-compose-v2" = { os = "linux" }
+"apt:docker-buildx" = { os = "linux" }
 
 [dotfiles]
 "~/.zshrc" = "~/src/dot-files/zshrc"

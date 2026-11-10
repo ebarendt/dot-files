@@ -36,7 +36,11 @@ plugins=(brew direnv)
 
 #source $ZSH/oh-my-zsh.sh
 
-eval "$(starship init zsh)"
+export PATH="$HOME/.local/bin:/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+
+# before starship, which is a mise tool; activation puts the tools on PATH right away
+command -v mise &> /dev/null && eval "$(mise activate zsh)"
+command -v starship &> /dev/null && eval "$(starship init zsh)"
 
 # File system
 if command -v eza &> /dev/null; then
@@ -59,7 +63,6 @@ setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY
 SAVEHIST=100000
 
-export PATH="$HOME/.local/bin:/usr/local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 export EDITOR=/usr/bin/vim
 
 #autoload bashcompinit
@@ -71,7 +74,6 @@ autoload -U compinit; compinit
 [[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
 
 # eval "$(gh copilot alias -- zsh)"
-eval "$(mise activate zsh)"
 
 # opencode
-export PATH=/Users/eric/.opencode/bin:$PATH
+[[ -d $HOME/.opencode/bin ]] && export PATH=$HOME/.opencode/bin:$PATH
