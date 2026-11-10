@@ -1,0 +1,6 @@
+# Headless Debian/Ubuntu servers have no 1Password app, so sign with ssh-keygen,
+# which uses the key in the SSH agent forwarded from the desktop (ssh -A).
+# Without a forwarded agent, commits fail to sign; set commit.gpgsign = false in
+# ~/.gitconfig.local on a server you don't reach that way.
+[gpg "ssh"]
+	program = ssh-keygen
