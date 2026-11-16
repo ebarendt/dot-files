@@ -74,6 +74,3 @@ autoload -U compinit; compinit
 [[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
 
 # eval "$(gh copilot alias -- zsh)"
-
-# opencode
-[[ -d $HOME/.opencode/bin ]] && export PATH=$HOME/.opencode/bin:$PATH
