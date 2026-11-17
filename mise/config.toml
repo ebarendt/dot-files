@@ -54,6 +54,7 @@ awscli = "latest"
 "aqua:aws/session-manager-plugin" = { version = "latest", os = ["macos"] }
 terraform = "1.15.4"
 "gem:mt-console" = { version = "latest", source = "https://rubygems.pkg.github.com/modern-treasury" }
+k9s = "latest"
 
 [bootstrap.packages]
 # macOS (Homebrew)
