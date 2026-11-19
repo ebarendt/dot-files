@@ -11,6 +11,8 @@ cd "$HOME"
 mise_dir=${MISE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/mise}
 # Debian/Ubuntu machines are headless servers here; see mise/server.toml
 is_server() { [ -f /etc/debian_version ]; }
+# Arch (CachyOS) machines get the pacman packages from mise/arch.toml
+is_arch() { [ -f /etc/arch-release ]; }
 
 # Point mise at the repo's config until ~/.config/mise/config.toml links to it.
 # Once it does, leave mise to find it there: MISE_GLOBAL_CONFIG_FILE makes mise
@@ -268,6 +270,7 @@ link_mise_configs() {
   [ "${1:-}" = --dry-run ] && dry=1
   local links=("config.toml:$repo/mise/config.toml")
   is_server && links+=("config.local.toml:$repo/mise/server.toml")
+  is_arch && links+=("config.local.toml:$repo/mise/arch.toml")
   for target in "${links[@]}"; do
     src=${target#*:} target="$mise_dir/${target%%:*}"
     [ -e "$target" ] || [ -L "$target" ] && continue

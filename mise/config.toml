@@ -53,6 +53,9 @@ awscli = "latest"
 terraform = "1.15.4"
 k9s = "latest"
 
+# Linux packages live in the per-distro overlays: mise/arch.toml (pacman) and
+# mise/server.toml (apt). mise has no distro filter, and warns about a missing
+# package manager, so each machine only gets its own.
 [bootstrap.packages]
 # macOS (Homebrew)
 "brew:git" = { os = "macos" }
@@ -64,31 +67,6 @@ k9s = "latest"
 # native library for the pg gem
 "brew:libpq" = { os = "macos" }
 "brew-cask:ghostty" = { os = "macos" }
-
-# Linux (Arch; skipped where pacman is missing). Terminals (foot, ghostty) come with Omarchy.
-"pacman:git" = { os = "linux" }
-"pacman:git-lfs" = { os = "linux" }
-"pacman:fish" = { os = "linux" }
-# SMB shares (`dot mounts`)
-"pacman:cifs-utils" = { os = "linux" }
-"pacman:postgresql-libs" = { os = "linux" }
-# docker pulls in containerd and runc itself; `dot docker` enables the daemon
-"pacman:docker" = { os = "linux" }
-"pacman:docker-compose" = { os = "linux" }
-"pacman:docker-buildx" = { os = "linux" }
-
-# Linux (Debian/Ubuntu). There is no distro filter, but mise skips a package
-# manager that isn't installed, so Arch skips these and Debian skips pacman.
-"apt:git" = { os = "linux" }
-"apt:git-lfs" = { os = "linux" }
-"apt:fish" = { os = "linux" }
-"apt:fzf" = { os = "linux" }
-"apt:cifs-utils" = { os = "linux" }
-# native library for the pg gem (headers plus pg_config)
-"apt:libpq-dev" = { os = "linux" }
-"apt:docker.io" = { os = "linux" }
-"apt:docker-compose-v2" = { os = "linux" }
-"apt:docker-buildx" = { os = "linux" }
 
 [dotfiles]
 "~/.zshrc" = "~/src/dot-files/zshrc"

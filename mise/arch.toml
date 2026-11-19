@@ -1,0 +1,15 @@
+# Overlay for Arch machines: adds the pacman packages. On Arch, `dot setup` links it
+# to ~/.config/mise/config.local.toml, which mise loads after config.toml.
+
+[bootstrap.packages]
+# Terminals (foot, ghostty) come with Omarchy.
+"pacman:git" = { os = "linux" }
+"pacman:git-lfs" = { os = "linux" }
+"pacman:fish" = { os = "linux" }
+# SMB shares (`dot mounts`)
+"pacman:cifs-utils" = { os = "linux" }
+"pacman:postgresql-libs" = { os = "linux" }
+# docker pulls in containerd and runc itself; `dot docker` enables the daemon
+"pacman:docker" = { os = "linux" }
+"pacman:docker-compose" = { os = "linux" }
+"pacman:docker-buildx" = { os = "linux" }

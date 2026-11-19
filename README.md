@@ -33,8 +33,14 @@ fprintd-enroll         # then check: fprintd-verify
 dot mounts             # optional: diskstation SMB shares
 ```
 
+System packages are split per distro because mise has no distro filter and warns
+about a missing package manager: on Arch, `dot setup` links `mise/arch.toml` (the
+pacman packages) to `~/.config/mise/config.local.toml`; on Debian/Ubuntu it links
+`mise/server.toml` (the apt packages) there instead.
+
 Debian/Ubuntu machines are treated as headless servers: `dot setup` links
-`~/.config/mise/config.local.toml` to `mise/server.toml`, which turns off the
+`~/.config/mise/config.local.toml` to `mise/server.toml`, which adds the apt
+packages and turns off the
 GUI configs (ghostty, foot, alacritty, niri, noctalia). mise loads it after
 `config.toml`, except when run from inside this repo, where `mise/config.toml`
 also loads as a project config and wins; `dot` always runs from `$HOME`, so use
