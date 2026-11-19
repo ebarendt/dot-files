@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "engineering": {
+      "url": "https://app.mintmcp.com/o/modern-treasury/s/engineering/mcp",
+      "description": "MintMCP engineering gateway: Datadog, Sentry, PagerDuty, pganalyze, NetBox, AWS, GitHub, Buildkite, Devin, Linear, Notion, Slack, Readme, crb-docs, eng-skills, Google Workspace (Docs/Drive/Gmail/Calendar/Sheets/Slides), Snowflake, Hex, Figma, Lucid, Excalidraw",
+      "exposure": "codemode"
+    }
+  }
+}

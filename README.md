@@ -92,6 +92,22 @@ earlier install: stop fprintd and wipe them with libfprint's
 `FPrint.Device.clear_storage_sync()` (as root, via python3-gobject), then
 re-enroll.
 
+# Work Mac
+
+`mise/work.toml` holds the Modern Treasury-only setup: the `mt-console` gem
+(`mt auth`) and the pi config under `pi/` (the MintMCP gateway, Bedrock through
+the `opencode-bedrock` AWS profile, and an extension that offers `mt auth` when
+the SSO credentials expire). Nothing tells `dot setup` which Mac is the work
+one, so link the overlay by hand, then apply:
+
+```shell
+ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/config.local.toml
+dot setup
+```
+
+The `opencode-bedrock` profile and its credential_process script live outside
+this repo, in `~/.aws/config` and `~/.config/opencode/aws-credential-process.sh`.
+
 # Keybindings (macOS)
 
 http://cobus.io/osx/2017/02/09/OSX_Home_End_Keys.html

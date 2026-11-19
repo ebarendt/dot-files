@@ -1,0 +1,27 @@
+# Overlay for the work (Modern Treasury) Mac. Link it by hand, since nothing on the
+# machine tells `dot setup` it is the work one:
+#   ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/config.local.toml
+# mise loads it after config.toml.
+
+[settings]
+minimum_release_age_excludes = ["gem:mt-console"]
+
+[settings.github]
+credential_command = '"/Users/eric/.local/bin/mise" exec gh -- gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
+
+# provides `mt auth`, which refreshes the AWS SSO credentials
+[tools."gem:mt-console"]
+version = "latest"
+source = "https://rubygems.pkg.github.com/modern-treasury"
+
+[tools."gem:mt-console".install_env]
+GEMRC = "/Users/eric/.local/share/mise/mt-console.gemrc"
+
+[dotfiles]
+# pi: MintMCP engineering gateway, Bedrock via the opencode-bedrock AWS profile,
+# and `mt auth` when the SSO credentials expire. The profile and its
+# credential_process script (~/.config/opencode/aws-credential-process.sh) are
+# set up outside this repo, in ~/.aws/config.
+"~/.pi/agent/mcp.json" = "~/src/dot-files/pi/agent/mcp.json"
+"~/.pi/agent/extensions/aws-profile.ts" = "~/src/dot-files/pi/agent/extensions/aws-profile.ts"
+"~/.pi/agent/extensions/auth-refresh.ts" = "~/src/dot-files/pi/agent/extensions/auth-refresh.ts"
