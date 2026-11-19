@@ -94,19 +94,22 @@ re-enroll.
 
 # Work Mac
 
-`mise/work.toml` holds the Modern Treasury-only setup: the `mt-console` gem
-(`mt auth`) and the pi config under `pi/` (the MintMCP gateway, Bedrock through
-the `opencode-bedrock` AWS profile, and an extension that offers `mt auth` when
-the SSO credentials expire). Nothing tells `dot setup` which Mac is the work
-one, so link the overlay by hand, then apply:
+`mise/work.toml` holds the Modern Treasury-only pi config under `pi/`: the
+MintMCP gateway, Bedrock through the `opencode-bedrock` AWS profile, and an
+extension that offers `mt auth` when the SSO credentials expire. Nothing tells
+`dot setup` which Mac is the work one, so link the overlay by hand, then apply:
 
 ```shell
-ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/config.local.toml
+mkdir -p ~/.config/mise/conf.d
+ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/conf.d/work.toml
 dot setup
 ```
 
-The `opencode-bedrock` profile and its credential_process script live outside
-this repo, in `~/.aws/config` and `~/.config/opencode/aws-credential-process.sh`.
+It goes in `conf.d` because the monorepo's install scripts manage
+`~/.config/mise/config.local.toml` on the work Mac (including the `mt-console`
+gem that provides `mt auth`). The `opencode-bedrock` profile and its
+credential_process script live outside this repo, in `~/.aws/config` and
+`~/.config/opencode/aws-credential-process.sh`.
 
 # Keybindings (macOS)
 

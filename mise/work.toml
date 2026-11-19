@@ -1,21 +1,10 @@
 # Overlay for the work (Modern Treasury) Mac. Link it by hand, since nothing on the
 # machine tells `dot setup` it is the work one:
-#   ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/config.local.toml
-# mise loads it after config.toml.
-
-[settings]
-minimum_release_age_excludes = ["gem:mt-console"]
-
-[settings.github]
-credential_command = '"/Users/eric/.local/bin/mise" exec gh -- gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
-
-# provides `mt auth`, which refreshes the AWS SSO credentials
-[tools."gem:mt-console"]
-version = "latest"
-source = "https://rubygems.pkg.github.com/modern-treasury"
-
-[tools."gem:mt-console".install_env]
-GEMRC = "/Users/eric/.local/share/mise/mt-console.gemrc"
+#   mkdir -p ~/.config/mise/conf.d
+#   ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/conf.d/work.toml
+# mise loads conf.d/*.toml along with the global config. (config.local.toml is
+# left alone here: the monorepo's install scripts manage it, including the
+# mt-console gem that provides `mt auth`.)
 
 [dotfiles]
 # pi: MintMCP engineering gateway, Bedrock via the opencode-bedrock AWS profile,
