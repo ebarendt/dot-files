@@ -52,6 +52,7 @@ awscli = "latest"
 "aqua:aws/session-manager-plugin" = { version = "latest", os = ["macos"] }
 terraform = "1.15.4"
 k9s = "latest"
+pi = "latest"
 
 # Linux packages live in the per-distro overlays: mise/arch.toml (pacman) and
 # mise/server.toml (apt). mise has no distro filter, and warns about a missing
