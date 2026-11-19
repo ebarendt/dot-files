@@ -4,7 +4,6 @@
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
-minimum_release_age_excludes = ["gem:mt-console"]
 
 
 [settings.ruby]
@@ -23,12 +22,11 @@ _.path = ["~/src/dot-files/bin"]
 
 [tools]
 claude = "latest"
-codex = "latest"
 opencode = "latest"
 go = "1.27.3"
 # opencode's npm package runs a node postinstall script
 node = "lts"
-ruby = "4.0.9"
+ruby = "4.0.10"
 rust = "latest"
 uv = "latest"
 
@@ -53,7 +51,6 @@ awscli = "latest"
 # the aqua package is macOS-only; on Arch it is in the AUR (aws-session-manager-plugin)
 "aqua:aws/session-manager-plugin" = { version = "latest", os = ["macos"] }
 terraform = "1.15.4"
-"gem:mt-console" = { version = "latest", source = "https://rubygems.pkg.github.com/modern-treasury" }
 k9s = "latest"
 
 [bootstrap.packages]
