@@ -3,8 +3,7 @@
 #   mkdir -p ~/.config/mise/conf.d
 #   ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/conf.d/work.toml
 # mise loads conf.d/*.toml along with the global config. (config.local.toml is
-# left alone here: the monorepo's install scripts manage it, including the
-# mt-console gem that provides `mt auth`.)
+# left alone here: the monorepo's install scripts write their settings to it.)
 
 [dotfiles]
 # pi: MintMCP engineering gateway, Bedrock via the opencode-bedrock AWS profile,
