@@ -105,11 +105,8 @@ ln -s ~/src/dot-files/mise/work.toml ~/.config/mise/conf.d/work.toml
 dot setup
 ```
 
-It goes in `conf.d` because the monorepo's install scripts (`install.sh`,
-`mise-tasks/setup/github-packages`) write their settings to
-`~/.config/mise/config.local.toml` on the work Mac. The `opencode-bedrock`
-profile and its credential_process script live outside this repo, in
-`~/.aws/config` and `~/.config/opencode/aws-credential-process.sh`.
+The `opencode-bedrock` profile and its credential_process script live outside
+this repo, in `~/.aws/config` and `~/.config/opencode/aws-credential-process.sh`.
 
 # Keybindings (macOS)
 
