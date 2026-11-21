@@ -9,6 +9,15 @@ test (uname) = Darwin; and set -gx OC_REFRESH_AUTH "mt auth"
 # No EC2 metadata on a laptop; without this an expired SSO session makes the AWS SDK retry IMDS for minutes before failing.
 set -gx AWS_EC2_METADATA_DISABLED true
 
+# ssh-add and ssh-copy-id ignore ssh_config's IdentityAgent and only read SSH_AUTH_SOCK,
+# so point it at the 1Password agent. Only where the socket exists; servers keep their forwarded agent.
+for sock in "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" "$HOME/.1password/agent.sock"
+    if test -S $sock
+        set -gx SSH_AUTH_SOCK $sock
+        break
+    end
+end
+
 type -q mise; and not status is-interactive; and mise activate fish --shims | source
 status is-interactive; or return
 
