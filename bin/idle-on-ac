@@ -1,0 +1,16 @@
+#!/bin/sh
+# Noctalia can't set idle behaviors per power source, so toggle idle suspend
+# ourselves: off while plugged in (lock and screen-off still apply), on otherwise.
+apply() {
+  online=0
+  for f in /sys/class/power_supply/A*/online; do
+    [ "$(cat "$f" 2>/dev/null)" = 1 ] && online=1
+  done
+  if [ "$online" = 1 ]; then v=false; else v=true; fi
+  noctalia msg config-set idle.behavior.lock-and-suspend.enabled "$v" >/dev/null
+}
+
+apply
+udevadm monitor --udev --subsystem-match=power_supply | while read -r _; do
+  apply
+done

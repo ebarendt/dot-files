@@ -2,3 +2,5 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
     spawn-at-startup "noctalia"
+    spawn-at-startup "onedrive_tray"
+    spawn-at-startup "/home/eric/src/dot-files/bin/idle-on-ac"

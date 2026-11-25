@@ -67,6 +67,7 @@ sudo, and prompts once for the share credentials, which are stored in
 # Hibernate (Linux)
 
 `dot hibernate` makes closing the lid suspend, then hibernate after 30 minutes
+on battery (plain suspend when plugged in)
 (`linux/systemd/`). Hibernation needs swap on disk, so it adds a btrfs `@swap`
 subvolume at `/swap` with a swapfile a little larger than RAM; zram stays the
 higher-priority swap. It uses sudo, is safe to re-run, and `--dry-run` previews.
